@@ -1,6 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import 'tailwindcss';
 
-body {
-  background-color: #101828;
-  color: white;
+@theme {
+  /* Premium System Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Light Mode Color System Tokens */
+  --color-canvas-default: #fafafc; /* Crisp, light off-white background canvas */
+  --color-canvas-panel: #ffffff; /* Pure white for bento grid cards/containers */
+  --color-canvas-inset: #f1f1f5; /* Light gray for input/search backgrounds */
+
+  --color-brand-primary: #2563eb; /* Radiant Corporate Blue for primary buttons */
+  --color-brand-secondary: #4f46e5; /* Deep Indigo for main headings */
+  --color-brand-dark: #0f172a; /* Slate 900 for premium, high-contrast text */
+  --color-brand-muted: #475569; /* Slate 600 for subtext and descriptors */
+
+  --color-border-subtle: #e2e8f0; /* Slate 200 for clean lines and card dividers */
+  --color-border-focus: #3b82f6; /* Active, focused input borders */
+
+  /* Contextual Feedback Accents */
+  --color-feedback-success: #10b981; /* Emerald Green for high matching scores */
+  --color-feedback-warning: #f59e0b; /* Amber for technical skill gaps */
+  --color-feedback-danger: #ef4444; /* Rose for system errors or alerts */
 }
