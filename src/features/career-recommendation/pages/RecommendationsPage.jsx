@@ -4,7 +4,6 @@ import {
   ArrowRightIcon,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
-
 import { useCareerRecommendations } from '../hooks/useRecommendations';
 import { useUser } from '../../authentication/hooks/useUser';
 import Spinner from '../../../components/Spinner';
@@ -13,32 +12,34 @@ export default function RecommendationsPage() {
   const navigate = useNavigate();
   const { user, profile } = useUser();
 
-  // Initialize our unified caching data hook
-  const { recommendations, assessment, isLoading, error } =
-    useCareerRecommendations(user?.id);
+  // Fetch from our new smart background-saving hook
+  const { data, isLoading, error } = useCareerRecommendations(user?.id);
 
   if (isLoading) {
     return (
       <div className='bg-canvas-default flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center font-sans'>
         <Spinner />
         <p className='text-brand-muted mt-2 animate-pulse text-sm'>
-          SkillBridge AI compiling matching career paths and parsing skill
-          profiles...
+          SkillBridge AI parsing your profiles and matching career tracks...
         </p>
       </div>
     );
   }
 
-  // Edge case handle: No historic evaluations found inside Supabase records
-  if (error || !recommendations || recommendations.length === 0) {
+  if (
+    error ||
+    !data ||
+    !data.recommendations ||
+    data.recommendations.length === 0
+  ) {
     return (
       <div className='bg-canvas-default flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center p-4 text-center font-sans'>
         <h2 className='text-brand-dark text-xl font-bold'>
           No Active Career Blueprints Found
         </h2>
         <p className='text-brand-muted mt-1 max-w-md text-sm'>
-          Before unlocking matching roadmaps, complete a simple evaluation
-          session to calculate your baseline criteria.
+          Complete an evaluation assessment first to generate your technical
+          profile data.
         </p>
         <button
           onClick={() => navigate('/skill-selector')}
@@ -50,29 +51,27 @@ export default function RecommendationsPage() {
     );
   }
 
+  const { assessment, recommendations } = data;
   const studentName = profile?.full_name
     ? profile.full_name.split(' ')[0]
     : 'Scholar';
 
   return (
     <div className='bg-canvas-default mx-auto max-w-7xl space-y-8 p-4 font-sans md:p-8'>
-      {/* Overview Metric Banner Card */}
       <div className='bg-canvas-panel border-border-subtle rounded-2xl border p-6 shadow-sm md:p-8'>
         <h1 className='text-brand-dark mb-2 text-2xl font-bold'>
           Assessment Results for {studentName}
         </h1>
         <p className='text-brand-muted max-w-3xl text-sm leading-relaxed'>
-          Based on your recent dynamic quiz evaluation (where you scored a
+          Based on your recent quiz evaluation session where you scored a
           verified{' '}
           <span className='text-brand-primary font-bold'>
-            {assessment?.verified_match_score}% accuracy rating
+            {assessment?.verified_match_score}% accuracy
           </span>{' '}
-          across your chosen core disciplines), our AI advisor has generated
-          three matching career tracks relevant to modern industry metrics.
+          across your skills matrix, your tailored pathways are ready.
         </p>
       </div>
 
-      {/* Grid Dashboard Loop */}
       <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
         {recommendations.map(rec => (
           <div
@@ -84,13 +83,7 @@ export default function RecommendationsPage() {
                 {rec.title}
               </h2>
               <div
-                className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${
-                  rec.match_percentage >= 80
-                    ? 'bg-feedback-success/10 text-feedback-success'
-                    : rec.match_percentage >= 70
-                      ? 'bg-brand-primary/10 text-brand-primary'
-                      : 'bg-feedback-warning/10 text-feedback-warning'
-                }`}
+                className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${rec.match_percentage >= 80 ? 'bg-feedback-success/10 text-feedback-success' : 'bg-brand-primary/10 text-brand-primary'}`}
               >
                 {rec.match_percentage}% Match
               </div>
@@ -100,43 +93,35 @@ export default function RecommendationsPage() {
               {rec.description}
             </p>
 
-            {/* Strengths & Gaps Content Stack */}
             <div className='mb-8 space-y-5'>
               <div>
-                <h3
-                  className='text-brand-secondary mb-3 font-sans text-2xl tracking-wider uppercase'
-                  style={{ fontSize: '10px', fontWeight: '700' }}
-                >
+                <h3 className='text-brand-secondary mb-3 text-xs font-bold tracking-wider uppercase'>
                   Verified Strengths
                 </h3>
                 <ul className='space-y-2'>
-                  {rec.strengths.map((strength, i) => (
+                  {rec.strengths.map((str, i) => (
                     <li
                       key={i}
-                      className='text-brand-dark flex items-start gap-2 text-xs leading-tight'
+                      className='text-brand-dark flex items-start gap-2 text-xs'
                     >
                       <CheckCircle2Icon
                         size={14}
                         className='text-feedback-success mt-0.5 shrink-0'
                       />
-                      {strength}
+                      {str}
                     </li>
                   ))}
                 </ul>
               </div>
-
               <div>
-                <h3
-                  className='text-brand-secondary mb-3 font-sans text-2xl tracking-wider uppercase'
-                  style={{ fontSize: '10px', fontWeight: '700' }}
-                >
+                <h3 className='text-brand-secondary mb-3 text-xs font-bold tracking-wider uppercase'>
                   Identified Gaps
                 </h3>
                 <ul className='space-y-2'>
                   {rec.gaps.map((gap, i) => (
                     <li
                       key={i}
-                      className='text-brand-dark flex items-start gap-2 text-xs leading-tight'
+                      className='text-brand-dark flex items-start gap-2 text-xs'
                     >
                       <AlertTriangleIcon
                         size={14}
@@ -149,19 +134,12 @@ export default function RecommendationsPage() {
               </div>
             </div>
 
-            {/* Pass current job parameters forward to timeline views using state routers */}
+            {/* We now pass the title via modern URL search parameters for pure navigation stability! */}
             <Link
-              to='/roadmap'
-              state={{
-                chosenJob: rec.title,
-                gaps: rec.gaps,
-                strengths: rec.strengths,
-                suitability: rec.match_percentage,
-              }}
+              to={`/roadmap?job=${encodeURIComponent(rec.title)}`}
               className='bg-canvas-inset border-border-subtle text-brand-dark hover:bg-canvas-default hover:border-brand-primary/50 mt-auto inline-flex w-full items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors'
             >
-              View Personalized Roadmap
-              <ArrowRightIcon size={14} />
+              View Personalized Roadmap <ArrowRightIcon size={14} />
             </Link>
           </div>
         ))}
