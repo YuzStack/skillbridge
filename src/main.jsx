@@ -4,7 +4,7 @@ import { Toaster } from 'react-hot-toast'; // Import Toast engine
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; // Import React Query
 
-import './index.css';
+import './styles/index.css';
 import routes from './routes';
 
 // Create a persistent, global Query Client instance

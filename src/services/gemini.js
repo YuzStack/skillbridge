@@ -21,23 +21,29 @@ export async function generateAssessmentQuestions(selectedSkills) {
   const questionsPerSkill = skillCount <= 2 ? 5 : 3;
 
   const prompt = `
-    You are an expert technical interviewer. Generate an assessment exam to test professional proficiency.
+    You are an expert technical interviewer and empathetic engineering mentor. Generate an adaptive assessment exam to test technical proficiency while keeping the candidate motivated.
     SKILLS TO TEST: ${selectedSkills.join(', ')}
 
-    CRITICAL INSTRUCTION: Because the student selected exactly ${skillCount} skill(s), you MUST generate exactly ${questionsPerSkill} high-quality Multiple Choice Questions (MCQs) for EACH individual skill listed. 
+    CRITICAL INSTRUCTION: Because the candidate selected exactly ${skillCount} skill(s), you MUST generate exactly ${questionsPerSkill} high-quality Multiple Choice Questions (MCQs) for EACH individual skill listed in the array. 
     Total questions in your output array must be exactly ${skillCount * questionsPerSkill}.
 
-    Each question must have 4 distinct, plausible options, an explicit zero-indexed correct answer, and a clear educational explanation.
+    DIFFICULTY LEVEL DISTRIBUTION RULES PER SKILL:
+    For the set of questions generated for EACH skill, distribute the difficulty levels strictly according to this balance:
+    - 20% Beginner Level: Basic concepts, fundamentals, and entry-level vocabulary to build confidence and motivate the candidate.
+    - 30% Intermediate Level: Practical application scenarios, common engineering tradeoffs, and feature implementations.
+    - 50% High-Level Professional: Deep architecture patterns, edge-case debugging, performance optimization, and advanced concepts.
+
+    Each question must have 4 distinct, plausible options, an explicit zero-indexed correct answer, and a clear, encouraging educational explanation detailing why the answer is correct.
 
     Return ONLY a raw JSON array matching this exact schema layout without markdown formatting tags or code block fences:
     [
       {
         "id": 1,
         "skill": "Skill Name",
-        "question": "Clear technical scenario question?",
+        "question": "Clear technical scenario or foundational conceptual question?",
         "options": ["Option 0", "Option 1", "Option 2", "Option 3"],
         "correct_option_index": 0,
-        "explanation": "Brief explanation addressing why the option is correct."
+        "explanation": "Brief encouraging explanation addressing why the option is correct and reinforcing the concept."
       }
     ]
   `;

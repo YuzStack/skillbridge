@@ -1,8 +1,18 @@
-# SkillBridge
+# SkillBridge Repository Consolidation
 
-A full consolidated snapshot of the SkillBridge code base is provided below. This includes root config files, application entry points, routes, layout components, pages, services, and styles.
+This file contains the full text of all repository files, excluding the consolidation file itself. Binary files are noted but not embedded.
 
-```text
+## .env
+
+```
+VITE_SUPABASE_URL=https://gnkirchgubenfmykrzht.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_mkNh_5K9H58Ebdw_0hLy1g_1Ku9c82f
+VITE_GEMINI_API_KEY=AIzaSyAoo39Qy7QJWpqekKTNPblwzESk4otTues
+```
+
+## .gitignore
+
+```
 # Logs
 logs
 *.log
@@ -27,9 +37,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.env
 ```
 
-```text
+## .prettierrc
+
+```
 {
   "singleQuote": true,
   "jsxSingleQuote": true,
@@ -38,47 +52,65 @@ dist-ssr
 }
 ```
 
-```json
-{
-  "name": "template-repo-2",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@google/genai": "^2.3.0",
-    "@supabase/supabase-js": "^2.105.4",
-    "@tailwindcss/vite": "^4.1.18",
-    "@tanstack/react-query": "^5.100.11",
-    "lucide-react": "^1.16.0",
-    "motion": "^12.39.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-hook-form": "^7.76.0",
-    "react-hot-toast": "^2.6.0",
-    "react-router": "^7.15.1",
-    "tailwindcss": "^4.1.18"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@types/react": "^19.2.5",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "globals": "^16.5.0",
-    "prettier": "^3.7.4",
-    "prettier-plugin-tailwindcss": "^0.7.2",
-    "vite": "^7.2.4"
-  }
-}
+## README.md
+
+```markdown
+# SkillBridge
 ```
+
+## eslint.config.js
+
+```javascript
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
+    },
+    rules: {
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+    },
+  },
+])
+```
+
+## index.html
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkillBridge</title>
+  </head>
+  <body class="bg-canvas-default">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+```
+
+## package-lock.json
 
 ```json
 {
@@ -4299,214 +4331,61 @@ dist-ssr
 }
 ```
 
-```js
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
+## package.json
 
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
-});
-```
-
-```js
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import { defineConfig, globalIgnores } from 'eslint/config'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{js,jsx}'],
-    extends: [
-      js.configs.recommended,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
-    ],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
-        sourceType: 'module',
-      },
-    },
-    rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-    },
+```json
+{
+  "name": "template-repo-2",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-])
-```
-
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/apple-touch-icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SkillBridge</title>
-  </head>
-  <body class="bg-canvas-default">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
-```
-
-```md
-# SkillBridge
-
-```
-
-```css
-@import url('https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@import 'tailwindcss';
-
-@layer base {
-  button {
-    cursor: pointer;
-  }
-}
-
-@theme {
-  /* Premium System Typography */
-  --font-sans: 'Inter', system-ui, sans-serif;
-
-  /* Light Mode Color System Tokens */
-  --color-canvas-default: #fafafc; /* Crisp, light off-white background canvas */
-  --color-canvas-panel: #ffffff; /* Pure white for bento grid cards/containers */
-  --color-canvas-inset: #f1f1f5; /* Light gray for input/search backgrounds */
-
-  --color-brand-primary: #2563eb; /* Radiant Corporate Blue for primary buttons */
-  --color-brand-secondary: #4f46e5; /* Deep Indigo for main headings */
-  --color-brand-dark: #0f172a; /* Slate 900 for premium, high-contrast text */
-  --color-brand-muted: #475569; /* Slate 600 for subtext and descriptors */
-
-  --color-border-subtle: #e2e8f0; /* Slate 200 for clean lines and card dividers */
-  --color-border-focus: #3b82f6; /* Active, focused input borders */
-
-  /* Contextual Feedback Accents */
-  --color-feedback-success: #10b981; /* Emerald Green for high matching scores */
-  --color-feedback-warning: #f59e0b; /* Amber for technical skill gaps */
-  --color-feedback-danger: #ef4444; /* Rose for system errors or alerts */
-}
-
-@keyframes loading-bar {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(300%);
+  "dependencies": {
+    "@google/genai": "^2.3.0",
+    "@supabase/supabase-js": "^2.105.4",
+    "@tailwindcss/vite": "^4.1.18",
+    "@tanstack/react-query": "^5.100.11",
+    "lucide-react": "^1.16.0",
+    "motion": "^12.39.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-hook-form": "^7.76.0",
+    "react-hot-toast": "^2.6.0",
+    "react-router": "^7.15.1",
+    "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "vite": "^7.2.4"
   }
 }
 ```
 
-```jsx
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { Toaster } from 'react-hot-toast'; // Import Toast engine
-import { createBrowserRouter, RouterProvider } from 'react-router';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; // Import React Query
+## public/.DS_Store
 
-import './index.css';
-import routes from './routes';
-
-// Create a persistent, global Query Client instance
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5, // Cache query data for 5 minutes before refetching
-      retry: 1, // Retry failed network/API requests once before alerting
-    },
-  },
-});
-
-const router = createBrowserRouter(routes);
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-
-      {/* Global toast notifications config */}
-      <Toaster
-        position='top-center'
-        toastOptions={{
-          success: {
-            duration: 3000,
-          },
-          error: {
-            duration: 5000,
-          },
-          style: {
-            background: '#FFFFFF',
-            color: '#0F172A',
-            fontFamily: 'Inter, sans-serif',
-            border: '1px solid #E2E8F0',
-            boxShadow: '0 4px 6px -1px rgba(15, 23, 42, 0.03)',
-          },
-        }}
-      />
-    </QueryClientProvider>
-  </StrictMode>,
-);
-
-// window.__TANSTACK_QUERY_CLIENT__ = queryClient; // For Dev Purpose
+```
+   Bud1            %                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @                                              @                                                @                                                @                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   E   %                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       DSDB                             `                                                     @                                                @                                                @                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 ```
 
-```jsx
-import { Navigate } from 'react-router';
+## public/apple-touch-icon.png
 
-import Signup from './features/authentication/pages/Signup';
-import Login from './features/authentication/pages/Login';
-import ForgotPassword from './features/authentication/pages/ForgotPassword';
-import AppLayout from './components/AppLayout';
-import Settings from './features/authentication/pages/Settings';
-import CvUploadPage from './features/cv-processing/pages/CvUploadPage';
-import SkillSelector from './features/skill-assessment/pages/SkillSelector';
-import TestingArena from './features/skill-assessment/pages/TestingArena';
-import RecommendationsPage from './features/career-recommendation/pages/RecommendationsPage';
-import RoadmapView from './features/career-recommendation/pages/RoadmapView';
-import HomePage from './features/dashboard/pages/HomePage';
-import ProtectedRoute from './components/ProtectedRoute';
-import ResetPassword from './features/authentication/pages/ResetPassword';
+*Binary file: not displayed in text.*
 
-const routes = [
-  // PUBLIC ROUTES
-  { path: '/signup', element: <Signup /> },
-  { path: '/login', element: <Login /> },
-  { path: '/forgot-password', element: <ForgotPassword /> },
-  { path: '/reset-password', element: <ResetPassword /> },
-
-  // PRIVATE ROUTES
-  {
-    element: (
-      <ProtectedRoute>
-        <AppLayout />
-      </ProtectedRoute>
-    ),
-    children: [
-      { path: '/', element: <HomePage /> },
-      { path: '/settings', element: <Settings /> },
-      { path: '/cv-upload', element: <CvUploadPage /> },
-      { path: '/skill-selector', element: <SkillSelector /> },
-      { path: '/assessment', element: <TestingArena /> },
-      { path: '/recommendations', element: <RecommendationsPage /> },
-      { path: '/roadmap', element: <RoadmapView /> },
-    ],
-  },
-
-  // FALLBACK
-  { path: '*', element: <Navigate to='/' replace /> },
-];
-
-export default routes;
-```
+## src/components/AppLayout.jsx
 
 ```jsx
 import { useEffect, useState } from 'react';
@@ -4552,6 +4431,8 @@ export default function AppLayout() {
   );
 }
 ```
+
+## src/components/Header.jsx
 
 ```jsx
 import { MenuIcon, LogOutIcon } from 'lucide-react';
@@ -4623,6 +4504,35 @@ export default function Header({ onMenuClick }) {
   );
 }
 ```
+
+## src/components/ProtectedRoute.jsx
+
+```jsx
+import { Navigate } from 'react-router';
+
+import { useUser } from '../features/authentication/hooks/useUser';
+import Spinner from './Spinner';
+
+export default function ProtectedRoute({ children }) {
+  const { isAuthenticated, isLoading } = useUser();
+
+  if (isLoading) {
+    return (
+      <div className='bg-canvas-default flex min-h-screen items-center justify-center font-sans'>
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to='/login' replace />;
+  }
+
+  if (isAuthenticated) return children;
+}
+```
+
+## src/components/Sidebar.jsx
 
 ```jsx
 import {
@@ -4770,30 +4680,7 @@ export function Sidebar({ isOpen, onClose, isMobile }) {
 }
 ```
 
-```jsx
-import { Navigate } from 'react-router';
-
-import { useUser } from '../features/authentication/hooks/useUser';
-import Spinner from './Spinner';
-
-export default function ProtectedRoute({ children }) {
-  const { isAuthenticated, isLoading } = useUser();
-
-  if (isLoading) {
-    return (
-      <div className='bg-canvas-default flex min-h-screen items-center justify-center font-sans'>
-        <Spinner />
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to='/login' replace />;
-  }
-
-  if (isAuthenticated) return children;
-}
-```
+## src/components/Spinner.jsx
 
 ```jsx
 export default function Spinner() {
@@ -4803,396 +4690,9 @@ export default function Spinner() {
 }
 ```
 
-```js
-import { supabase } from './supabase';
+## src/features/authentication/hooks/useSettings.js
 
-/**
- * Registers a new student using Supabase Auth
- */
-export async function signUpUser({ email, password, fullName }) {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      data: {
-        full_name: fullName,
-      },
-    },
-  });
-
-  if (error) throw new Error(error.message);
-  return data;
-}
-
-/**
- * Authenticates an existing student session
- */
-export async function loginUser({ email, password }) {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
-
-  if (error) throw new Error(error.message);
-  return data;
-}
-
-/**
- * Grabs the active user session and attaches their custom profile table row
- */
-export async function getCurrentUser() {
-  // 1. Check if there is an active session from Supabase
-  const { data: sessionData } = await supabase.auth.getSession();
-  if (!sessionData.session) return null;
-
-  const { data: authUser, error: authError } = await supabase.auth.getUser();
-  if (authError) throw new Error(authError.message);
-
-  // 2. Fetch the corresponding synchronized profile row from PostgreSQL
-  const { data: profile, error: profileError } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', authUser.user.id)
-    .single();
-
-  if (profileError) {
-    console.error('Profile fetch error:', profileError.message);
-    return null;
-  }
-
-  // Return a combined object containing both credentials and custom profile metadata
-  return {
-    ...authUser.user,
-    profile,
-  };
-}
-
-/**
- * Signs out the current user session completely
- */
-export async function logoutUser() {
-  const { error } = await supabase.auth.signOut();
-  if (error) throw new Error(error.message);
-}
-
-/**
- * Updates metadata fields inside the profiles table
- */
-export async function updateProfileDetails({
-  userId,
-  fullName,
-  university,
-  avatarUrl,
-}) {
-  const updateData = {
-    full_name: fullName,
-    university,
-    updated_at: new Date().toISOString(),
-  };
-  if (avatarUrl) updateData.avatar_url = avatarUrl;
-
-  const { data, error } = await supabase
-    .from('profiles')
-    .update(updateData)
-    .eq('id', userId)
-    .select()
-    .single();
-
-  if (error) throw new Error(error.message);
-  return data;
-}
-
-/**
- * Uploads an avatar image asset directly into the Supabase 'avatars' bucket storage
- */
-export async function uploadAvatarImage(file, userId) {
-  const fileExtension = file.name.split('.').pop();
-  const filePath = `${userId}-${Math.random()}.${fileExtension}`;
-
-  const { error: uploadError } = await supabase.storage
-    .from('avatars')
-    .upload(filePath, file, { cacheControl: '3600', upsert: true });
-
-  if (uploadError) throw new Error(uploadError.message);
-
-  const { data } = supabase.storage.from('avatars').getPublicUrl(filePath);
-  return data.publicUrl;
-}
-
-/**
- * Updates the user's active login password credentials
- */
-export async function updateUserPassword(newPassword) {
-  const { data, error } = await supabase.auth.updateUser({
-    password: newPassword,
-  });
-
-  if (error) throw new Error(error.message);
-  return data;
-}
-
-/**
- * Deletes the student's entire account along with all cascaded profile logs
- */
-export async function deleteUserAccountComplete() {
-  // Due to Supabase client boundaries, RPC or Edge triggers handle remote deletions smoothly,
-  // but running a direct auth.users delete clears data cascades perfectly for project simulation targets.
-  const { error } = await supabase.rpc('delete_user_self');
-
-  // Fallback: Sign out the user and clean client history variables instantly
-  if (error) {
-    const { error: authDeleteError } = await supabase.auth.signOut();
-    if (authDeleteError) throw new Error(authDeleteError.message);
-  }
-}
-
-/**
- * Triggers a secure password recovery email via Supabase Auth
- */
-export async function sendPasswordResetEmail(email) {
-  // Route the inbox link directly to the clean public reset page
-  const redirectToUrl = `${window.location.origin}/reset-password`;
-
-  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: redirectToUrl,
-  });
-
-  if (error) throw new Error(error.message);
-  return data;
-}
-```
-
-```js
-import { supabase } from './supabase';
-import { genAI } from './gemini';
-
-const JSON_CLEAN_REGEX = /^```json\s+|\s+```$/g;
-
-/**
- * 1. Pulls the student's absolute latest assessment row from Supabase
- */
-export async function getLatestUserAssessment(userId) {
-  const { data, error } = await supabase
-    .from('assessments')
-    .select('*')
-    .eq('user_id', userId)
-    .order('created_at', { ascending: false })
-    .limit(1);
-
-  if (error) throw new Error(error.message);
-  return data[0] || null;
-}
-
-/**
- * 2. Feeds that assessment row to Gemini to generate the career options payload
- */
-export async function generateAiCareerRecommendations(assessmentData) {
-  if (!assessmentData) return [];
-
-  const prompt = `
-    You are an expert Nigerian career counselor and tech talent placement officer.
-    Analyze this student's objective technical evaluation performance metrics to recommend matching careers:
-
-    EVALUATION METRICS:
-    - Target Domain Field Focus: ${assessmentData.tested_discipline}
-    - Verified Input Competencies: ${assessmentData.selected_skills.join(', ')}
-    - Objective Exam Score: ${assessmentData.verified_match_score}%
-
-    Based on this data, identify exactly three real-world career paths suitable for the student. Focus on fields relevant to modern Nigerian industries (e.g., Fintech, localized engineering, or global remote consulting tracks).
-
-    Identify 'Verified Strengths' based only on skills that match their baseline focus, and identify explicit 'Skill Gaps' the student needs to work on to become job-ready.
-
-    Return ONLY a raw JSON array matching this exact schema layout without markdown code blocks:
-    [
-      {
-        "id": 1,
-        "title": "Frontend Engineer",
-        "description": "Build modern interfaces and dynamic web apps...",
-        "match_percentage": 88,
-        "strengths": ["React Fundamentals", "Tailwind CSS Layouts"],
-        "gaps": ["Advanced State Management (Redux)", "Unit Testing Frameworks"]
-      }
-    ]
-  `;
-
-  try {
-    const response = await genAI.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt,
-    });
-
-    const cleanText = response.text.replace(JSON_CLEAN_REGEX, '').trim();
-    return JSON.parse(cleanText);
-  } catch (error) {
-    console.error('Gemini Recommendation Fetch Failure:', error);
-    throw new Error('Failed to parse career recommendation insights.');
-  }
-}
-
-/**
- * 3. Saves the three AI-generated career paths back into the assessment record row
- */
-export async function saveRecommendationsToAssessment({
-  assessmentId,
-  recommendations,
-}) {
-  const { data, error } = await supabase
-    .from('assessments')
-    .update({ generated_recommendations: recommendations })
-    .eq('id', assessmentId)
-    .select()
-    .single();
-
-  if (error) throw new Error(error.message);
-  return data;
-}
-
-/**
- * 4. Feeds the chosen career path and identified gaps to Gemini to generate a structured timeline roadmap
- */
-export async function generateAiTimelineRoadmap({
-  targetCareer,
-  identifiedGaps,
-}) {
-  const prompt = `
-    You are an elite tech career coach specializing in the Nigerian job market.
-    Generate a highly practical, personalized month-by-month learning roadmap for a student transitioning into this role.
-
-    TARGET CAREER: ${targetCareer}
-    IDENTIFIED SKILL GAPS TO BRIDGE: ${identifiedGaps.join(', ')}
-
-    Create a strict 6-month progressive curriculum to bridge these gaps. 
-    For each month, define a clear overarching technical theme, a primary skill focus, and include 2 accessible learning resource links.
-    Crucially, mix global platforms (like Coursera, freeCodeCamp, or Udemy) with affordable, localized options relevant to Nigeria (such as ALX Africa, Jobberman Skills, or Utiva tracks).
-
-    Return ONLY a raw JSON array matching this exact schema layout without markdown code fence blocks:
-    [
-      {
-        "id": 1,
-        "month": "Month 1",
-        "title": "Foundational Theme Title",
-        "completed": false,
-        "links": [
-          { "text": "ALX Software Engineering Track", "url": "https://www.alxafrica.com" },
-          { "text": "Coursera: Basic Frameworks", "url": "https://www.coursera.org" }
-        ]
-      }
-    ]
-  `;
-
-  try {
-    const response = await genAI.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt,
-    });
-
-    const cleanText = response.text.replace(/^```json\s+|\s+```$/g, '').trim();
-    return JSON.parse(cleanText);
-  } catch (error) {
-    console.error('Gemini Roadmap Generation Failure:', error);
-    throw new Error('Failed to assemble personalized monthly timeline steps.');
-  }
-}
-
-/**
- * 5. Patches the updated milestone completion checklist array into the database row
- */
-export async function updateRoadmapProgress({ roadmapId, updatedMilestones }) {
-  const { data, error } = await supabase
-    .from('roadmaps')
-    .update({ timeline_milestones_json: updatedMilestones })
-    .eq('id', roadmapId)
-    .select()
-    .single();
-
-  if (error) throw new Error(error.message);
-  return data;
-}
-
-/**
- * 6. Completely removes an assessment record row out of Supabase PostgreSQL
- */
-export async function deleteAssessmentRecord(assessmentId) {
-  const { data, error } = await supabase
-    .from('assessments')
-    .delete()
-    .eq('id', assessmentId);
-
-  if (error) throw new Error(error.message);
-  return data;
-}
-```
-
-```js
-import { GoogleGenAI } from '@google/genai';
-
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-
-if (!apiKey) {
-  console.error(
-    'Missing VITE_GEMINI_API_KEY environment configuration variable.',
-  );
-}
-
-export const genAI = new GoogleGenAI({ apiKey });
-
-const JSON_CLEAN_REGEX = /^```json\s+|\s+```$/g;
-
-/**
- * Generates an automated, dynamic multi-choice quiz with adaptive volume
- */
-export async function generateAssessmentQuestions(selectedSkills) {
-  // Calculate dynamic constraints based on the size of the chosen array
-  const skillCount = selectedSkills.length;
-  const questionsPerSkill = skillCount <= 2 ? 5 : 3;
-
-  const prompt = `
-    You are an expert technical interviewer. Generate an assessment exam to test professional proficiency.
-    SKILLS TO TEST: ${selectedSkills.join(', ')}
-
-    CRITICAL INSTRUCTION: Because the student selected exactly ${skillCount} skill(s), you MUST generate exactly ${questionsPerSkill} high-quality Multiple Choice Questions (MCQs) for EACH individual skill listed. 
-    Total questions in your output array must be exactly ${skillCount * questionsPerSkill}.
-
-    Each question must have 4 distinct, plausible options, an explicit zero-indexed correct answer, and a clear educational explanation.
-
-    Return ONLY a raw JSON array matching this exact schema layout without markdown formatting tags or code block fences:
-    [
-      {
-        "id": 1,
-        "skill": "Skill Name",
-        "question": "Clear technical scenario question?",
-        "options": ["Option 0", "Option 1", "Option 2", "Option 3"],
-        "correct_option_index": 0,
-        "explanation": "Brief explanation addressing why the option is correct."
-      }
-    ]
-  `;
-
-  try {
-    const response = await genAI.models.generateContent({
-      model: 'gemini-3.5-flash',
-      contents: prompt,
-    });
-
-    const cleanText = response.text.replace(JSON_CLEAN_REGEX, '').trim();
-    return JSON.parse(cleanText);
-  } catch (error) {
-    console.error('Gemini Generation Error:', error);
-    throw new Error('Failed to compile adaptive assessment parameters.');
-  }
-}
-```
-
-```js
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-
-export const supabase = createClient(supabaseUrl, supabaseKey);
-```
-
-```js
+```javascript
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
@@ -5259,7 +4759,9 @@ export function useForgotPassword() {
 }
 ```
 
-```js
+## src/features/authentication/hooks/useUser.js
+
+```javascript
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 
@@ -5346,274 +4848,7 @@ export function useLogout() {
 }
 ```
 
-```jsx
-import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router';
-import toast from 'react-hot-toast';
-
-import { useLogin } from '../hooks/useUser';
-
-export default function Login() {
-  const { login, isLoggingIn } = useLogin();
-  const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = data => {
-    login(
-      { email: data.email, password: data.password },
-      {
-        onSuccess: () => {
-          toast.success('Logged in successfully!');
-          navigate('/');
-        },
-        onError: err => {
-          toast.error(err.message || 'Authentication credentials rejected.');
-        },
-      },
-    );
-  };
-
-  return (
-    <div className='bg-canvas-default flex min-h-screen items-center justify-center p-4'>
-      <div className='bg-canvas-panel border-border-subtle w-full max-w-md rounded-2xl border p-8 shadow-md'>
-        <div className='mb-8 text-center'>
-          <div className='bg-brand-primary mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl text-2xl font-bold text-white'>
-            S
-          </div>
-          <h1 className='text-brand-dark mb-2 text-2xl font-bold'>
-            Welcome back
-          </h1>
-          <p className='text-brand-muted'>
-            Enter your details to access your dashboard.
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
-          <div>
-            <label className='text-brand-dark mb-1.5 block text-sm font-medium'>
-              Email
-            </label>
-            <input
-              type='email'
-              {...register('email', { required: 'Email is required' })}
-              className={`bg-canvas-inset border-border-subtle text-brand-dark w-full rounded-lg border px-4 py-2.5 transition-colors focus:outline-none ${errors.email ? 'border-feedback-danger focus:border-feedback-danger' : 'focus:border-border-focus'}`}
-              placeholder='Enter your email'
-            />
-            {errors.email && (
-              <p className='text-feedback-danger mt-1 text-xs'>
-                {errors.email.message}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <div className='mb-1.5 flex items-center justify-between'>
-              <label className='text-brand-dark block text-sm font-medium'>
-                Password
-              </label>
-              <Link
-                to='/forgot-password'
-                className='text-brand-primary text-sm hover:underline'
-              >
-                Forgot password?
-              </Link>
-            </div>
-            <input
-              type='password'
-              {...register('password', { required: 'Password is required' })}
-              className={`bg-canvas-inset border-border-subtle text-brand-dark w-full rounded-lg border px-4 py-2.5 transition-colors focus:outline-none ${errors.password ? 'border-feedback-danger focus:border-feedback-danger' : 'focus:border-border-focus'}`}
-              placeholder='••••••••'
-            />
-            {errors.password && (
-              <p className='text-feedback-danger mt-1 text-xs'>
-                {errors.password.message}
-              </p>
-            )}
-          </div>
-
-          <button
-            type='submit'
-            disabled={isLoggingIn}
-            className='bg-brand-primary hover:bg-brand-primary/90 w-full rounded-lg px-4 py-2.5 font-medium text-white transition-colors disabled:cursor-not-allowed disabled:opacity-50'
-          >
-            {isLoggingIn ? 'Signing In...' : 'Sign In'}
-          </button>
-        </form>
-
-        <p className='text-brand-muted mt-8 text-center text-sm'>
-          Don't have an account?{' '}
-          <Link
-            to='/signup'
-            className='text-brand-primary font-medium hover:underline'
-          >
-            Sign up
-          </Link>
-        </p>
-      </div>
-    </div>
-  );
-}
-```
-
-```jsx
-import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router';
-import toast from 'react-hot-toast';
-
-import { useSignup } from '../hooks/useUser';
-
-export default function Signup() {
-  const { signup, isSigningUp } = useSignup();
-  const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = data => {
-    signup(
-      { email: data.email, password: data.password, fullName: data.fullName },
-      {
-        onSuccess: () => {
-          toast.success('Account registered successfully! Welcome.');
-          navigate('/');
-        },
-        onError: err => {
-          toast.error(err.message || 'Registration failed.');
-        },
-      },
-    );
-  };
-
-  return (
-    <div className='bg-canvas-default flex min-h-screen items-center justify-center p-4'>
-      <div className='bg-canvas-panel border-border-subtle w-full max-w-md rounded-2xl border p-8 shadow-md'>
-        <div className='mb-8 text-center'>
-          <div className='bg-brand-primary mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl text-2xl font-bold text-white'>
-            S
-          </div>
-          <h1 className='text-brand-dark mb-2 text-2xl font-bold'>
-            Create an account
-          </h1>
-          <p className='text-brand-muted'>
-            Start your career journey with SkillBridge.
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
-          <div>
-            <label className='text-brand-dark mb-1.5 block text-sm font-medium'>
-              Full Name
-            </label>
-            <input
-              type='text'
-              {...register('fullName', { required: 'Full name is required' })}
-              className={`bg-canvas-inset border-border-subtle text-brand-dark w-full rounded-lg border px-4 py-2.5 transition-colors focus:outline-none ${errors.fullName ? 'border-feedback-danger focus:border-feedback-danger' : 'focus:border-border-focus'}`}
-              placeholder='E.g., Simbiat Lawal'
-            />
-            {errors.fullName && (
-              <p className='text-feedback-danger mt-1 text-xs'>
-                {errors.fullName.message}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label className='text-brand-dark mb-1.5 block text-sm font-medium'>
-              Email
-            </label>
-            <input
-              type='email'
-              {...register('email', {
-                required: 'Email is required',
-                pattern: {
-                  value: /^\S+@\S+$/i,
-                  message: 'Invalid email address',
-                },
-              })}
-              className={`bg-canvas-inset border-border-subtle text-brand-dark w-full rounded-lg border px-4 py-2.5 transition-colors focus:outline-none ${errors.email ? 'border-feedback-danger focus:border-feedback-danger' : 'focus:border-border-focus'}`}
-              placeholder='E.g., simbiat@university.edu'
-            />
-            {errors.email && (
-              <p className='text-feedback-danger mt-1 text-xs'>
-                {errors.email.message}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label className='text-brand-dark mb-1.5 block text-sm font-medium'>
-              Password
-            </label>
-            <input
-              type='password'
-              {...register('password', {
-                required: 'Password is required',
-                minLength: {
-                  value: 8,
-                  message: 'Password must be at least 8 characters',
-                },
-              })}
-              className={`bg-canvas-inset border-border-subtle text-brand-dark w-full rounded-lg border px-4 py-2.5 transition-colors focus:outline-none ${errors.password ? 'border-feedback-danger focus:border-feedback-danger' : 'focus:border-border-focus'}`}
-              placeholder='Create a strong password'
-            />
-            {errors.password && (
-              <p className='text-feedback-danger mt-1 text-xs'>
-                {errors.password.message}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label className='text-brand-dark mb-1.5 block text-sm font-medium'>
-              Confirm Password
-            </label>
-            <input
-              type='password'
-              {...register('passwordConfirm', {
-                required: 'Please confirm password',
-                validate: value =>
-                  value === getValues().password || 'Passwords need to match',
-              })}
-              className={`bg-canvas-inset border-border-subtle text-brand-dark w-full rounded-lg border px-4 py-2.5 transition-colors focus:outline-none ${errors.password ? 'border-feedback-danger focus:border-feedback-danger' : 'focus:border-border-focus'}`}
-              placeholder='Repeat password'
-            />
-            {errors.passwordConfirm && (
-              <p className='text-feedback-danger mt-1 text-xs'>
-                {errors.passwordConfirm.message}
-              </p>
-            )}
-          </div>
-
-          <button
-            type='submit'
-            disabled={isSigningUp}
-            className='bg-brand-primary hover:bg-brand-primary/90 w-full rounded-lg px-4 py-2.5 font-medium text-white transition-colors disabled:cursor-not-allowed disabled:opacity-50'
-          >
-            {isSigningUp ? 'Creating Account...' : 'Create Account'}
-          </button>
-        </form>
-
-        <p className='text-brand-muted mt-8 text-center text-sm'>
-          Already have an account?{' '}
-          <Link
-            to='/login'
-            className='text-brand-primary font-medium hover:underline'
-          >
-            Log in
-          </Link>
-        </p>
-      </div>
-    </div>
-  );
-}
-```
+## src/features/authentication/pages/ForgotPassword.jsx
 
 ```jsx
 import { useState } from 'react';
@@ -5771,6 +5006,123 @@ export default function ForgotPassword() {
 }
 ```
 
+## src/features/authentication/pages/Login.jsx
+
+```jsx
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
+
+import { useLogin } from '../hooks/useUser';
+
+export default function Login() {
+  const { login, isLoggingIn } = useLogin();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = data => {
+    login(
+      { email: data.email, password: data.password },
+      {
+        onSuccess: () => {
+          toast.success('Logged in successfully!');
+          navigate('/');
+        },
+        onError: err => {
+          toast.error(err.message || 'Authentication credentials rejected.');
+        },
+      },
+    );
+  };
+
+  return (
+    <div className='bg-canvas-default flex min-h-screen items-center justify-center p-4'>
+      <div className='bg-canvas-panel border-border-subtle w-full max-w-md rounded-2xl border p-8 shadow-md'>
+        <div className='mb-8 text-center'>
+          <div className='bg-brand-primary mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl text-2xl font-bold text-white'>
+            S
+          </div>
+          <h1 className='text-brand-dark mb-2 text-2xl font-bold'>
+            Welcome back
+          </h1>
+          <p className='text-brand-muted'>
+            Enter your details to access your dashboard.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
+          <div>
+            <label className='text-brand-dark mb-1.5 block text-sm font-medium'>
+              Email
+            </label>
+            <input
+              type='email'
+              {...register('email', { required: 'Email is required' })}
+              className={`bg-canvas-inset border-border-subtle text-brand-dark w-full rounded-lg border px-4 py-2.5 transition-colors focus:outline-none ${errors.email ? 'border-feedback-danger focus:border-feedback-danger' : 'focus:border-border-focus'}`}
+              placeholder='Enter your email'
+            />
+            {errors.email && (
+              <p className='text-feedback-danger mt-1 text-xs'>
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <div className='mb-1.5 flex items-center justify-between'>
+              <label className='text-brand-dark block text-sm font-medium'>
+                Password
+              </label>
+              <Link
+                to='/forgot-password'
+                className='text-brand-primary text-sm hover:underline'
+              >
+                Forgot password?
+              </Link>
+            </div>
+            <input
+              type='password'
+              {...register('password', { required: 'Password is required' })}
+              className={`bg-canvas-inset border-border-subtle text-brand-dark w-full rounded-lg border px-4 py-2.5 transition-colors focus:outline-none ${errors.password ? 'border-feedback-danger focus:border-feedback-danger' : 'focus:border-border-focus'}`}
+              placeholder='••••••••'
+            />
+            {errors.password && (
+              <p className='text-feedback-danger mt-1 text-xs'>
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+
+          <button
+            type='submit'
+            disabled={isLoggingIn}
+            className='bg-brand-primary hover:bg-brand-primary/90 w-full rounded-lg px-4 py-2.5 font-medium text-white transition-colors disabled:cursor-not-allowed disabled:opacity-50'
+          >
+            {isLoggingIn ? 'Signing In...' : 'Sign In'}
+          </button>
+        </form>
+
+        <p className='text-brand-muted mt-8 text-center text-sm'>
+          Don't have an account?{' '}
+          <Link
+            to='/signup'
+            className='text-brand-primary font-medium hover:underline'
+          >
+            Sign up
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+}
+```
+
+## src/features/authentication/pages/ResetPassword.jsx
+
 ```jsx
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
@@ -5867,6 +5219,8 @@ export default function ResetPassword() {
   );
 }
 ```
+
+## src/features/authentication/pages/Settings.jsx
 
 ```jsx
 import { useRef, useState, useEffect } from 'react';
@@ -6171,70 +5525,657 @@ export default function Settings() {
 }
 ```
 
-```js
-import { genAI } from '../../../services/gemini';
+## src/features/authentication/pages/Signup.jsx
 
-// Official un-bundled stable minified worker build path matching version 4.x
-const PDF_WORKER_SRC =
-  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.min.mjs';
+```jsx
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
 
-/**
- * 1. Extracts plain raw text contents out of a local binary PDF file blob
- */
-export async function parsePdfText(file) {
-  // Import the primary module script dynamically from CDN
-  const pdfjs =
-    await import('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.min.mjs');
-  pdfjs.GlobalWorkerOptions.workerSrc = PDF_WORKER_SRC;
+import { useSignup } from '../hooks/useUser';
 
-  const arrayBuffer = await file.arrayBuffer();
-  const loadingTask = pdfjs.getDocument({ data: arrayBuffer });
-  const pdf = await loadingTask.promise;
+export default function Signup() {
+  const { signup, isSigningUp } = useSignup();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm();
 
-  let fullText = '';
+  const onSubmit = data => {
+    signup(
+      { email: data.email, password: data.password, fullName: data.fullName },
+      {
+        onSuccess: () => {
+          toast.success('Account registered successfully! Welcome.');
+          navigate('/');
+        },
+        onError: err => {
+          toast.error(err.message || 'Registration failed.');
+        },
+      },
+    );
+  };
 
-  // Iterate through every page inside the document layout grid
-  for (let i = 1; i <= pdf.numPages; i++) {
-    const page = await pdf.getPage(i);
-    const textContent = await page.getTextContent();
-    const pageItems = textContent.items.map(item => item.str).join(' ');
-    fullText += pageItems + '\n';
-  }
+  return (
+    <div className='bg-canvas-default flex min-h-screen items-center justify-center p-4'>
+      <div className='bg-canvas-panel border-border-subtle w-full max-w-md rounded-2xl border p-8 shadow-md'>
+        <div className='mb-8 text-center'>
+          <div className='bg-brand-primary mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl text-2xl font-bold text-white'>
+            S
+          </div>
+          <h1 className='text-brand-dark mb-2 text-2xl font-bold'>
+            Create an account
+          </h1>
+          <p className='text-brand-muted'>
+            Start your career journey with SkillBridge.
+          </p>
+        </div>
 
-  return fullText;
-}
+        <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
+          <div>
+            <label className='text-brand-dark mb-1.5 block text-sm font-medium'>
+              Full Name
+            </label>
+            <input
+              type='text'
+              {...register('fullName', { required: 'Full name is required' })}
+              className={`bg-canvas-inset border-border-subtle text-brand-dark w-full rounded-lg border px-4 py-2.5 transition-colors focus:outline-none ${errors.fullName ? 'border-feedback-danger focus:border-feedback-danger' : 'focus:border-border-focus'}`}
+              placeholder='E.g., Simbiat Lawal'
+            />
+            {errors.fullName && (
+              <p className='text-feedback-danger mt-1 text-xs'>
+                {errors.fullName.message}
+              </p>
+            )}
+          </div>
 
-/**
- * 2. Transmits unstructured text to Gemini to parse out real data matching our layout
- */
-export async function extractCvMetricsWithAi(rawCvText) {
-  const prompt = `
-    You are an expert AI human resources assistant and ATS resume data parsing engine.
-    Analyze the following raw text extracted from an applicant's CV document:
+          <div>
+            <label className='text-brand-dark mb-1.5 block text-sm font-medium'>
+              Email
+            </label>
+            <input
+              type='email'
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: 'Invalid email address',
+                },
+              })}
+              className={`bg-canvas-inset border-border-subtle text-brand-dark w-full rounded-lg border px-4 py-2.5 transition-colors focus:outline-none ${errors.email ? 'border-feedback-danger focus:border-feedback-danger' : 'focus:border-border-focus'}`}
+              placeholder='E.g., simbiat@university.edu'
+            />
+            {errors.email && (
+              <p className='text-feedback-danger mt-1 text-xs'>
+                {errors.email.message}
+              </p>
+            )}
+          </div>
 
-    ---
-    ${rawCvText}
-    ---
+          <div>
+            <label className='text-brand-dark mb-1.5 block text-sm font-medium'>
+              Password
+            </label>
+            <input
+              type='password'
+              {...register('password', {
+                required: 'Password is required',
+                minLength: {
+                  value: 8,
+                  message: 'Password must be at least 8 characters',
+                },
+              })}
+              className={`bg-canvas-inset border-border-subtle text-brand-dark w-full rounded-lg border px-4 py-2.5 transition-colors focus:outline-none ${errors.password ? 'border-feedback-danger focus:border-feedback-danger' : 'focus:border-border-focus'}`}
+              placeholder='Create a strong password'
+            />
+            {errors.password && (
+              <p className='text-feedback-danger mt-1 text-xs'>
+                {errors.password.message}
+              </p>
+            )}
+          </div>
 
-    Extract the primary educational qualification history, overall professional experiences, and a flat array list mapping out all technical/domain skills.
+          <div>
+            <label className='text-brand-dark mb-1.5 block text-sm font-medium'>
+              Confirm Password
+            </label>
+            <input
+              type='password'
+              {...register('passwordConfirm', {
+                required: 'Please confirm password',
+                validate: value =>
+                  value === getValues().password || 'Passwords need to match',
+              })}
+              className={`bg-canvas-inset border-border-subtle text-brand-dark w-full rounded-lg border px-4 py-2.5 transition-colors focus:outline-none ${errors.password ? 'border-feedback-danger focus:border-feedback-danger' : 'focus:border-border-focus'}`}
+              placeholder='Repeat password'
+            />
+            {errors.passwordConfirm && (
+              <p className='text-feedback-danger mt-1 text-xs'>
+                {errors.passwordConfirm.message}
+              </p>
+            )}
+          </div>
 
-    Return ONLY a raw JSON object matching this exact schema layout without markdown code fence blocks:
-    {
-      "education": "Most prominent degree title and associated institution name",
-      "experience": "Concise paragraph or list summarizing historical professional roles or internship involvements",
-      "skills": ["SkillA", "SkillB", "SkillC", "SkillD"]
-    }
-  `;
+          <button
+            type='submit'
+            disabled={isSigningUp}
+            className='bg-brand-primary hover:bg-brand-primary/90 w-full rounded-lg px-4 py-2.5 font-medium text-white transition-colors disabled:cursor-not-allowed disabled:opacity-50'
+          >
+            {isSigningUp ? 'Creating Account...' : 'Create Account'}
+          </button>
+        </form>
 
-  const response = await genAI.models.generateContent({
-    model: 'gemini-3.5-flash',
-    contents: prompt,
-  });
-
-  const cleanText = response.text.replace(/^```json\s+|\s+```$/g, '').trim();
-  return JSON.parse(cleanText);
+        <p className='text-brand-muted mt-8 text-center text-sm'>
+          Already have an account?{' '}
+          <Link
+            to='/login'
+            className='text-brand-primary font-medium hover:underline'
+          >
+            Log in
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
 }
 ```
+
+## src/features/career-recommendation/hooks/useRecommendations.js
+
+```javascript
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { supabase } from '../../../services/supabase';
+import {
+  generateAiCareerRecommendations,
+  generateAiTimelineRoadmap,
+} from '../../../services/apiRecommendations';
+
+/**
+ * 1. Hook to grab the user's latest assessment and its generated career options
+ */
+export function useCareerRecommendations(userId) {
+  return useQuery({
+    queryKey: ['latestAssessment', userId],
+    queryFn: async () => {
+      if (!userId) return null;
+
+      // Pull latest assessment row
+      const { data, error } = await supabase
+        .from('assessments')
+        .select('*')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      if (error) throw new Error(error.message);
+      const assessment = data[0] || null;
+      if (!assessment) return null;
+
+      // If recommendations have already been generated and saved, return them immediately!
+      if (assessment.generated_recommendations) {
+        return {
+          assessment,
+          recommendations: assessment.generated_recommendations,
+        };
+      }
+
+      // If not, fetch them fresh from Gemini
+      const recommendations = await generateAiCareerRecommendations(assessment);
+
+      // Save them to the database instantly in the background so it never repeats
+      await supabase
+        .from('assessments')
+        .update({ generated_recommendations: recommendations })
+        .eq('id', assessment.id);
+
+      return { assessment, recommendations };
+    },
+    enabled: Boolean(userId),
+    staleTime: 1000 * 60 * 30, // 30 Minute local cache lock
+  });
+}
+
+/**
+ * 2. Hook to fetch or build a personalized learning roadmap from the database
+ */
+export function useTimelineRoadmap(userId, targetCareer) {
+  return useQuery({
+    queryKey: ['activeRoadmap', userId, targetCareer],
+    queryFn: async () => {
+      if (!userId || !targetCareer) return null;
+
+      // A. Check if this specific roadmap row already exists in Supabase
+      const { data: existingRoadmap } = await supabase
+        .from('roadmaps')
+        .select('*')
+        .eq('user_id', userId)
+        .eq('target_career_title', targetCareer)
+        .limit(1);
+
+      if (existingRoadmap && existingRoadmap.length > 0) {
+        return existingRoadmap[0];
+      }
+
+      // B. If it doesn't exist, fetch the parent assessment details to find gaps
+      const { data: assessmentData } = await supabase
+        .from('assessments')
+        .select('*')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      const latestAssessment = assessmentData?.[0];
+      const identifiedGaps = latestAssessment?.selected_skills || [
+        'General Core Skills',
+      ];
+
+      // C. Trigger Gemini to construct the 6-month milestones
+      const generatedMilestones = await generateAiTimelineRoadmap({
+        targetCareer,
+        identifiedGaps,
+      });
+
+      // D. Save it directly to the database row so it persists permanently
+      const { data: newRoadmap, error: saveError } = await supabase
+        .from('roadmaps')
+        .insert([
+          {
+            user_id: userId,
+            assessment_id:
+              latestAssessment?.id || '00000000-0000-0000-0000-000000000000',
+            target_career_title: targetCareer,
+            suitability_percentage: 85,
+            verified_strengths: latestAssessment?.selected_skills || [],
+            identified_gaps: [],
+            timeline_milestones_json: generatedMilestones,
+          },
+        ])
+        .select()
+        .single();
+
+      if (saveError) throw new Error(saveError.message);
+      return newRoadmap;
+    },
+    enabled: Boolean(userId) && Boolean(targetCareer),
+    staleTime: 1000 * 60 * 60, // 1 hour data stability cache
+  });
+}
+
+/**
+ * 3. Mutation hook to update completion checkboxes in real time
+ */
+export function useUpdateRoadmapProgress() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ roadmapId, updatedMilestones }) => {
+      const { data, error } = await supabase
+        .from('roadmaps')
+        .update({ timeline_milestones_json: updatedMilestones })
+        .eq('id', roadmapId)
+        .select()
+        .single();
+
+      if (error) throw new Error(error.message);
+      return data;
+    },
+    onSuccess: data => {
+      // Invalidate the cache line to reflect updates everywhere instantly
+      queryClient.invalidateQueries({
+        queryKey: ['activeRoadmap', data.user_id, data.target_career_title],
+      });
+    },
+  });
+}
+```
+
+## src/features/career-recommendation/pages/RecommendationsPage.jsx
+
+```jsx
+import {
+  CheckCircle2Icon,
+  AlertTriangleIcon,
+  ArrowRightIcon,
+} from 'lucide-react';
+import { Link, useNavigate } from 'react-router';
+import { useCareerRecommendations } from '../hooks/useRecommendations';
+import { useUser } from '../../authentication/hooks/useUser';
+import Spinner from '../../../components/Spinner';
+
+export default function RecommendationsPage() {
+  const navigate = useNavigate();
+  const { user, profile } = useUser();
+
+  // Fetch from our new smart background-saving hook
+  const { data, isLoading, error } = useCareerRecommendations(user?.id);
+
+  if (isLoading) {
+    return (
+      <div className='bg-canvas-default flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center font-sans'>
+        <Spinner />
+        <p className='text-brand-muted mt-2 animate-pulse text-sm'>
+          SkillBridge AI parsing your profiles and matching career tracks...
+        </p>
+      </div>
+    );
+  }
+
+  if (
+    error ||
+    !data ||
+    !data.recommendations ||
+    data.recommendations.length === 0
+  ) {
+    return (
+      <div className='bg-canvas-default flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center p-4 text-center font-sans'>
+        <h2 className='text-brand-dark text-xl font-bold'>
+          No Active Career Blueprints Found
+        </h2>
+        <p className='text-brand-muted mt-1 max-w-md text-sm'>
+          Complete an evaluation assessment first to generate your technical
+          profile data.
+        </p>
+        <button
+          onClick={() => navigate('/skill-selector')}
+          className='bg-brand-primary hover:bg-brand-primary/90 mt-6 cursor-pointer rounded-lg px-5 py-2.5 font-medium text-white transition-colors'
+        >
+          Take Assessment Quiz
+        </button>
+      </div>
+    );
+  }
+
+  const { assessment, recommendations } = data;
+  const studentName = profile?.full_name
+    ? profile.full_name.split(' ')[0]
+    : 'Scholar';
+
+  return (
+    <div className='bg-canvas-default mx-auto max-w-7xl space-y-8 p-4 font-sans md:p-8'>
+      <div className='bg-canvas-panel border-border-subtle rounded-2xl border p-6 shadow-sm md:p-8'>
+        <h1 className='text-brand-dark mb-2 text-2xl font-bold'>
+          Assessment Results for {studentName}
+        </h1>
+        <p className='text-brand-muted max-w-3xl text-sm leading-relaxed'>
+          Based on your recent quiz evaluation session where you scored a
+          verified{' '}
+          <span className='text-brand-primary font-bold'>
+            {assessment?.verified_match_score}% accuracy
+          </span>{' '}
+          across your skills matrix, your tailored pathways are ready.
+        </p>
+      </div>
+
+      <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
+        {recommendations.map(rec => (
+          <div
+            key={rec.id}
+            className='bg-canvas-panel border-border-subtle hover:border-brand-primary/40 flex h-full flex-col rounded-2xl border p-6 shadow-sm transition-all duration-200'
+          >
+            <div className='mb-4 flex items-start justify-between gap-2'>
+              <h2 className='text-brand-dark text-lg leading-tight font-bold tracking-tight'>
+                {rec.title}
+              </h2>
+              <div
+                className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${rec.match_percentage >= 80 ? 'bg-feedback-success/10 text-feedback-success' : 'bg-brand-primary/10 text-brand-primary'}`}
+              >
+                {rec.match_percentage}% Match
+              </div>
+            </div>
+
+            <p className='text-brand-muted mb-6 flex-1 text-xs leading-relaxed'>
+              {rec.description}
+            </p>
+
+            <div className='mb-8 space-y-5'>
+              <div>
+                <h3 className='text-brand-secondary mb-3 text-xs font-bold tracking-wider uppercase'>
+                  Verified Strengths
+                </h3>
+                <ul className='space-y-2'>
+                  {rec.strengths.map((str, i) => (
+                    <li
+                      key={i}
+                      className='text-brand-dark flex items-start gap-2 text-xs'
+                    >
+                      <CheckCircle2Icon
+                        size={14}
+                        className='text-feedback-success mt-0.5 shrink-0'
+                      />
+                      {str}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className='text-brand-secondary mb-3 text-xs font-bold tracking-wider uppercase'>
+                  Identified Gaps
+                </h3>
+                <ul className='space-y-2'>
+                  {rec.gaps.map((gap, i) => (
+                    <li
+                      key={i}
+                      className='text-brand-dark flex items-start gap-2 text-xs'
+                    >
+                      <AlertTriangleIcon
+                        size={14}
+                        className='text-feedback-warning mt-0.5 shrink-0'
+                      />
+                      {gap}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* We now pass the title via modern URL search parameters for pure navigation stability! */}
+            <Link
+              to={`/roadmap?job=${encodeURIComponent(rec.title)}`}
+              className='bg-canvas-inset border-border-subtle text-brand-dark hover:bg-canvas-default hover:border-brand-primary/50 mt-auto inline-flex w-full items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors'
+            >
+              View Personalized Roadmap <ArrowRightIcon size={14} />
+            </Link>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+## src/features/career-recommendation/pages/RoadmapView.jsx
+
+```jsx
+import { useLocation, useNavigate } from 'react-router';
+import { ExternalLinkIcon, CheckIcon, ArrowLeftIcon } from 'lucide-react';
+import toast from 'react-hot-toast';
+
+import {
+  useTimelineRoadmap,
+  useUpdateRoadmapProgress,
+} from '../hooks/useRecommendations';
+import Spinner from '../../../components/Spinner';
+import { useUser } from '../../authentication/hooks/useUser';
+
+export default function RoadmapView() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useUser();
+
+  // Extract the target job name directly out of the browser's native URL search bar
+  const searchParams = new URLSearchParams(location.search);
+  const chosenJob = searchParams.get('job');
+
+  // Trigger our unified database-first hook
+  const {
+    data: roadmapInstance,
+    isLoading,
+    error,
+  } = useTimelineRoadmap(user?.id, chosenJob);
+  const { mutate: syncProgress } = useUpdateRoadmapProgress();
+
+  if (isLoading) {
+    return (
+      <div className='bg-canvas-default flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center font-sans'>
+        <Spinner />
+        <p className='text-brand-muted mt-2 animate-pulse text-sm'>
+          SkillBridge AI sync loading your persistent roadmap tracking
+          profile...
+        </p>
+      </div>
+    );
+  }
+
+  if (error || !roadmapInstance) {
+    return (
+      <div className='bg-canvas-default flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center p-4 text-center font-sans'>
+        <p className='text-feedback-danger font-medium'>
+          Failed to load the active timeline profile row parameters.
+        </p>
+        <button
+          onClick={() => navigate('/recommendations')}
+          className='text-brand-primary mt-4 text-sm font-semibold hover:underline'
+        >
+          Go Back to Recommendations
+        </button>
+      </div>
+    );
+  }
+
+  // Read the milestones array directly out of our PostgreSQL JSONB cell
+  const milestones = roadmapInstance.timeline_milestones_json || [];
+
+  const toggleStepComplete = id => {
+    const updatedMilestones = milestones.map(step => {
+      if (step.id === id) {
+        return { ...step, completed: !step.completed };
+      }
+      return step;
+    });
+
+    // Fire mutation patch directly to database row
+    syncProgress(
+      {
+        roadmapId: roadmapInstance.id,
+        updatedMilestones,
+      },
+      {
+        onSuccess: () => {
+          toast.success('Progress saved online!');
+        },
+        onError: err => {
+          toast.error('Sync failed: ' + err.message);
+        },
+      },
+    );
+  };
+
+  return (
+    <div className='bg-canvas-default mx-auto min-h-[calc(100vh-4rem)] max-w-5xl p-4 font-sans md:p-8'>
+      <div className='mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center'>
+        <div>
+          <h1 className='text-brand-dark text-2xl font-bold'>
+            Learning Roadmap
+          </h1>
+          <p className='text-brand-muted mt-1 text-sm'>
+            Persistent curriculum tracker for your role as a{' '}
+            <span className='text-brand-primary font-bold'>{chosenJob}</span>.
+          </p>
+        </div>
+        <button
+          onClick={() => navigate('/recommendations')}
+          className='text-brand-muted hover:text-brand-dark border-border-subtle bg-canvas-panel inline-flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 text-sm shadow-sm transition-colors'
+        >
+          <ArrowLeftIcon size={16} /> Back to Results
+        </button>
+      </div>
+
+      <div className='bg-canvas-panel border-border-subtle relative rounded-2xl border p-6 shadow-sm md:p-10'>
+        <div className='bg-border-subtle absolute top-12 bottom-12 left-10.75 z-0 w-0.5' />
+
+        <div className='relative z-10 space-y-12'>
+          {milestones.map(step => {
+            const isStepDone = step.completed;
+            return (
+              <div key={step.id} className='relative flex items-start gap-6'>
+                <div className='mt-1 shrink-0'>
+                  <div
+                    onClick={() => toggleStepComplete(step.id)}
+                    className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 transition-all duration-200 ${
+                      isStepDone
+                        ? 'bg-feedback-success border-feedback-success text-white shadow-sm'
+                        : 'bg-canvas-inset border-border-subtle hover:border-brand-primary text-transparent'
+                    }`}
+                  >
+                    <CheckIcon
+                      size={18}
+                      className={isStepDone ? 'block' : 'hidden'}
+                    />
+                  </div>
+                </div>
+
+                <div
+                  className={`bg-canvas-panel flex-1 rounded-xl border p-5 transition-all duration-200 ${isStepDone ? 'border-feedback-success/40 bg-feedback-success/5' : 'border-border-subtle'}`}
+                >
+                  <div className='mb-4 flex flex-col justify-between gap-4 md:flex-row md:items-center'>
+                    <div>
+                      <span className='text-brand-secondary mb-1 block text-xs font-bold tracking-wider uppercase'>
+                        {step.month}
+                      </span>
+                      <h3
+                        className={`text-brand-dark text-base font-bold ${isStepDone ? 'text-brand-muted line-through' : ''}`}
+                      >
+                        {step.title}
+                      </h3>
+                    </div>
+
+                    <label className='group flex shrink-0 cursor-pointer items-center gap-2 select-none'>
+                      <input
+                        type='checkbox'
+                        checked={isStepDone}
+                        onChange={() => toggleStepComplete(step.id)}
+                        className='hidden'
+                      />
+                      <div
+                        className={`flex h-5 w-5 items-center justify-center rounded border transition-colors ${isStepDone ? 'bg-brand-primary border-brand-primary text-white' : 'border-border-subtle bg-canvas-inset group-hover:border-brand-primary'}`}
+                      >
+                        {isStepDone && <CheckIcon size={14} />}
+                      </div>
+                      <span className='text-brand-muted group-hover:text-brand-dark text-xs font-semibold'>
+                        Mark month complete
+                      </span>
+                    </label>
+                  </div>
+
+                  <div className='border-border-subtle/50 mt-4 flex flex-wrap gap-y-2 border-t pt-4'>
+                    {step.links.map((link, i) => (
+                      <a
+                        key={i}
+                        href={link.url}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='text-brand-primary mr-6 inline-flex items-center gap-1.5 text-xs font-semibold hover:underline'
+                      >
+                        {link.text} <ExternalLinkIcon size={12} />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+## src/features/cv-processing/pages/CvUploadPage.jsx
 
 ```jsx
 import { useState, useRef } from 'react';
@@ -6620,493 +6561,388 @@ export default function CvUploadPage() {
 }
 ```
 
-```js
+## src/features/cv-processing/services/cvService.js
+
+```javascript
+import { genAI } from '../../../services/gemini';
+
+// Official un-bundled stable minified worker build path matching version 4.x
+const PDF_WORKER_SRC =
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.min.mjs';
+
+/**
+ * 1. Extracts plain raw text contents out of a local binary PDF file blob
+ */
+export async function parsePdfText(file) {
+  // Import the primary module script dynamically from CDN
+  const pdfjs =
+    await import('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.min.mjs');
+  pdfjs.GlobalWorkerOptions.workerSrc = PDF_WORKER_SRC;
+
+  const arrayBuffer = await file.arrayBuffer();
+  const loadingTask = pdfjs.getDocument({ data: arrayBuffer });
+  const pdf = await loadingTask.promise;
+
+  let fullText = '';
+
+  // Iterate through every page inside the document layout grid
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const textContent = await page.getTextContent();
+    const pageItems = textContent.items.map(item => item.str).join(' ');
+    fullText += pageItems + '\n';
+  }
+
+  return fullText;
+}
+
+/**
+ * 2. Transmits unstructured text to Gemini to parse out real data matching our layout
+ */
+export async function extractCvMetricsWithAi(rawCvText) {
+  const prompt = `
+    You are an expert AI human resources assistant and ATS resume data parsing engine.
+    Analyze the following raw text extracted from an applicant's CV document:
+
+    ---
+    ${rawCvText}
+    ---
+
+    Extract the primary educational qualification history, overall professional experiences, and a flat array list mapping out all technical/domain skills.
+
+    Return ONLY a raw JSON object matching this exact schema layout without markdown code fence blocks:
+    {
+      "education": "Most prominent degree title and associated institution name",
+      "experience": "Concise paragraph or list summarizing historical professional roles or internship involvements",
+      "skills": ["SkillA", "SkillB", "SkillC", "SkillD"]
+    }
+  `;
+
+  const response = await genAI.models.generateContent({
+    model: 'gemini-3.5-flash',
+    contents: prompt,
+  });
+
+  const cleanText = response.text.replace(/^```json\s+|\s+```$/g, '').trim();
+  return JSON.parse(cleanText);
+}
+```
+
+## src/features/dashboard/hooks/useDashboardData.js
+
+```javascript
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { deleteAssessmentRecord } from '../../../services/apiRecommendations';
 import { supabase } from '../../../services/supabase';
-import {
-  generateAiCareerRecommendations,
-  generateAiTimelineRoadmap,
-} from '../../../services/apiRecommendations';
+import toast from 'react-hot-toast';
 
 /**
- * 1. Hook to grab the user's latest assessment and its generated career options
+ * Custom hook to aggregate historic logs for the main workspace landing page
  */
-export function useCareerRecommendations(userId) {
+export function useDashboardData(userId) {
   return useQuery({
-    queryKey: ['latestAssessment', userId],
+    queryKey: ['dashboardHistory', userId],
     queryFn: async () => {
-      if (!userId) return null;
+      if (!userId) return { history: [], roadmaps: [] };
 
-      // Pull latest assessment row
-      const { data, error } = await supabase
+      // 1. Fetch all evaluation records ordered by newest first
+      const { data: history, error: historyError } = await supabase
         .from('assessments')
         .select('*')
         .eq('user_id', userId)
-        .order('created_at', { ascending: false })
-        .limit(1);
+        .order('created_at', { ascending: false });
 
-      if (error) throw new Error(error.message);
-      const assessment = data[0] || null;
-      if (!assessment) return null;
+      if (historyError) throw new Error(historyError.message);
 
-      // If recommendations have already been generated and saved, return them immediately!
-      if (assessment.generated_recommendations) {
-        return {
-          assessment,
-          recommendations: assessment.generated_recommendations,
-        };
-      }
+      // 2. Fetch all persistent roadmaps saved to the profile
+      const { data: roadmaps, error: roadmapError } = await supabase
+        .from('roadmaps')
+        .select('*')
+        .eq('user_id', userId);
 
-      // If not, fetch them fresh from Gemini
-      const recommendations = await generateAiCareerRecommendations(assessment);
+      if (roadmapError) throw new Error(roadmapError.message);
 
-      // Save them to the database instantly in the background so it never repeats
-      await supabase
-        .from('assessments')
-        .update({ generated_recommendations: recommendations })
-        .eq('id', assessment.id);
-
-      return { assessment, recommendations };
+      return { history, roadmaps };
     },
     enabled: Boolean(userId),
-    staleTime: 1000 * 60 * 30, // 30 Minute local cache lock
+    staleTime: 1000 * 60 * 2, // 2-minute refresh buffer
   });
 }
 
 /**
- * 2. Hook to fetch or build a personalized learning roadmap from the database
+ * React Query mutation to handle clearing history rows with instant cache updates
  */
-export function useTimelineRoadmap(userId, targetCareer) {
-  return useQuery({
-    queryKey: ['activeRoadmap', userId, targetCareer],
-    queryFn: async () => {
-      if (!userId || !targetCareer) return null;
-
-      // A. Check if this specific roadmap row already exists in Supabase
-      const { data: existingRoadmap } = await supabase
-        .from('roadmaps')
-        .select('*')
-        .eq('user_id', userId)
-        .eq('target_career_title', targetCareer)
-        .limit(1);
-
-      if (existingRoadmap && existingRoadmap.length > 0) {
-        return existingRoadmap[0];
-      }
-
-      // B. If it doesn't exist, fetch the parent assessment details to find gaps
-      const { data: assessmentData } = await supabase
-        .from('assessments')
-        .select('*')
-        .eq('user_id', userId)
-        .order('created_at', { ascending: false })
-        .limit(1);
-
-      const latestAssessment = assessmentData?.[0];
-      const identifiedGaps = latestAssessment?.selected_skills || [
-        'General Core Skills',
-      ];
-
-      // C. Trigger Gemini to construct the 6-month milestones
-      const generatedMilestones = await generateAiTimelineRoadmap({
-        targetCareer,
-        identifiedGaps,
-      });
-
-      // D. Save it directly to the database row so it persists permanently
-      const { data: newRoadmap, error: saveError } = await supabase
-        .from('roadmaps')
-        .insert([
-          {
-            user_id: userId,
-            assessment_id:
-              latestAssessment?.id || '00000000-0000-0000-0000-000000000000',
-            target_career_title: targetCareer,
-            suitability_percentage: 85,
-            verified_strengths: latestAssessment?.selected_skills || [],
-            identified_gaps: [],
-            timeline_milestones_json: generatedMilestones,
-          },
-        ])
-        .select()
-        .single();
-
-      if (saveError) throw new Error(saveError.message);
-      return newRoadmap;
-    },
-    enabled: Boolean(userId) && Boolean(targetCareer),
-    staleTime: 1000 * 60 * 60, // 1 hour data stability cache
-  });
-}
-
-/**
- * 3. Mutation hook to update completion checkboxes in real time
- */
-export function useUpdateRoadmapProgress() {
+export function useDeleteAssessment() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ roadmapId, updatedMilestones }) => {
-      const { data, error } = await supabase
-        .from('roadmaps')
-        .update({ timeline_milestones_json: updatedMilestones })
-        .eq('id', roadmapId)
-        .select()
-        .single();
-
-      if (error) throw new Error(error.message);
-      return data;
+    mutationFn: deleteAssessmentRecord,
+    onSuccess: () => {
+      toast.success('Evaluation record permanently removed.');
+      // Invalidate the cache matrix to trigger an automatic background update across the UI
+      queryClient.invalidateQueries({ queryKey: ['dashboardHistory'] });
+      // Also clear active roadmap cache headers since child records cascaded away
+      queryClient.invalidateQueries({ queryKey: ['activeRoadmap'] });
     },
-    onSuccess: data => {
-      // Invalidate the cache line to reflect updates everywhere instantly
-      queryClient.invalidateQueries({
-        queryKey: ['activeRoadmap', data.user_id, data.target_career_title],
-      });
+    onError: err => {
+      toast.error('Failed to clear row: ' + err.message);
     },
   });
 }
 ```
 
+## src/features/dashboard/pages/HomePage.jsx
+
 ```jsx
 import {
-  CheckCircle2Icon,
-  AlertTriangleIcon,
+  AlertCircleIcon,
+  FileTextIcon,
+  TargetIcon,
   ArrowRightIcon,
+  ChevronRightIcon,
+  CheckCircle2Icon,
+  Trash2Icon,
 } from 'lucide-react';
-import { Link, useNavigate } from 'react-router';
-import { useCareerRecommendations } from '../hooks/useRecommendations';
+import { Link } from 'react-router';
+
 import { useUser } from '../../authentication/hooks/useUser';
+import {
+  useDashboardData,
+  useDeleteAssessment,
+} from '../hooks/useDashboardData';
 import Spinner from '../../../components/Spinner';
 
-export default function RecommendationsPage() {
-  const navigate = useNavigate();
-  const { user, profile } = useUser();
+export default function HomePage() {
+  const { user, profile, isLoading: isLoadingUser } = useUser();
+  const { data, isLoading: isLoadingData } = useDashboardData(user?.id);
 
-  // Fetch from our new smart background-saving hook
-  const { data, isLoading, error } = useCareerRecommendations(user?.id);
+  // Initialize our new real-time deletion engine hook
+  const { mutate: deleteAssessment, isPending: isDeleting } =
+    useDeleteAssessment();
 
-  if (isLoading) {
+  if (isLoadingUser || isLoadingData) {
     return (
-      <div className='bg-canvas-default flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center font-sans'>
+      <div className='bg-canvas-default flex min-h-[calc(100vh-4rem)] items-center justify-center font-sans'>
         <Spinner />
-        <p className='text-brand-muted mt-2 animate-pulse text-sm'>
-          SkillBridge AI parsing your profiles and matching career tracks...
-        </p>
       </div>
     );
   }
 
-  if (
-    error ||
-    !data ||
-    !data.recommendations ||
-    data.recommendations.length === 0
-  ) {
-    return (
-      <div className='bg-canvas-default flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center p-4 text-center font-sans'>
-        <h2 className='text-brand-dark text-xl font-bold'>
-          No Active Career Blueprints Found
-        </h2>
-        <p className='text-brand-muted mt-1 max-w-md text-sm'>
-          Complete an evaluation assessment first to generate your technical
-          profile data.
-        </p>
-        <button
-          onClick={() => navigate('/skill-selector')}
-          className='bg-brand-primary hover:bg-brand-primary/90 mt-6 cursor-pointer rounded-lg px-5 py-2.5 font-medium text-white transition-colors'
-        >
-          Take Assessment Quiz
-        </button>
-      </div>
-    );
-  }
-
-  const { assessment, recommendations } = data;
-  const studentName = profile?.full_name
+  const firstName = profile?.full_name
     ? profile.full_name.split(' ')[0]
     : 'Scholar';
+  const historyLogs = data?.history || [];
+  const savedRoadmaps = data?.roadmaps || [];
+  const isUnlocked = historyLogs.length > 0;
 
-  return (
-    <div className='bg-canvas-default mx-auto max-w-7xl space-y-8 p-4 font-sans md:p-8'>
-      <div className='bg-canvas-panel border-border-subtle rounded-2xl border p-6 shadow-sm md:p-8'>
-        <h1 className='text-brand-dark mb-2 text-2xl font-bold'>
-          Assessment Results for {studentName}
-        </h1>
-        <p className='text-brand-muted max-w-3xl text-sm leading-relaxed'>
-          Based on your recent quiz evaluation session where you scored a
-          verified{' '}
-          <span className='text-brand-primary font-bold'>
-            {assessment?.verified_match_score}% accuracy
-          </span>{' '}
-          across your skills matrix, your tailored pathways are ready.
-        </p>
-      </div>
-
-      <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
-        {recommendations.map(rec => (
-          <div
-            key={rec.id}
-            className='bg-canvas-panel border-border-subtle hover:border-brand-primary/40 flex h-full flex-col rounded-2xl border p-6 shadow-sm transition-all duration-200'
-          >
-            <div className='mb-4 flex items-start justify-between gap-2'>
-              <h2 className='text-brand-dark text-lg leading-tight font-bold tracking-tight'>
-                {rec.title}
-              </h2>
-              <div
-                className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${rec.match_percentage >= 80 ? 'bg-feedback-success/10 text-feedback-success' : 'bg-brand-primary/10 text-brand-primary'}`}
-              >
-                {rec.match_percentage}% Match
-              </div>
-            </div>
-
-            <p className='text-brand-muted mb-6 flex-1 text-xs leading-relaxed'>
-              {rec.description}
-            </p>
-
-            <div className='mb-8 space-y-5'>
-              <div>
-                <h3 className='text-brand-secondary mb-3 text-xs font-bold tracking-wider uppercase'>
-                  Verified Strengths
-                </h3>
-                <ul className='space-y-2'>
-                  {rec.strengths.map((str, i) => (
-                    <li
-                      key={i}
-                      className='text-brand-dark flex items-start gap-2 text-xs'
-                    >
-                      <CheckCircle2Icon
-                        size={14}
-                        className='text-feedback-success mt-0.5 shrink-0'
-                      />
-                      {str}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className='text-brand-secondary mb-3 text-xs font-bold tracking-wider uppercase'>
-                  Identified Gaps
-                </h3>
-                <ul className='space-y-2'>
-                  {rec.gaps.map((gap, i) => (
-                    <li
-                      key={i}
-                      className='text-brand-dark flex items-start gap-2 text-xs'
-                    >
-                      <AlertTriangleIcon
-                        size={14}
-                        className='text-feedback-warning mt-0.5 shrink-0'
-                      />
-                      {gap}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* We now pass the title via modern URL search parameters for pure navigation stability! */}
-            <Link
-              to={`/roadmap?job=${encodeURIComponent(rec.title)}`}
-              className='bg-canvas-inset border-border-subtle text-brand-dark hover:bg-canvas-default hover:border-brand-primary/50 mt-auto inline-flex w-full items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors'
-            >
-              View Personalized Roadmap <ArrowRightIcon size={14} />
-            </Link>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-```
-
-```jsx
-import { useLocation, useNavigate } from 'react-router';
-import { ExternalLinkIcon, CheckIcon, ArrowLeftIcon } from 'lucide-react';
-import toast from 'react-hot-toast';
-
-import {
-  useTimelineRoadmap,
-  useUpdateRoadmapProgress,
-} from '../hooks/useRecommendations';
-import Spinner from '../../../components/Spinner';
-import { useUser } from '../../authentication/hooks/useUser';
-
-export default function RoadmapView() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { user } = useUser();
-
-  // Extract the target job name directly out of the browser's native URL search bar
-  const searchParams = new URLSearchParams(location.search);
-  const chosenJob = searchParams.get('job');
-
-  // Trigger our unified database-first hook
-  const {
-    data: roadmapInstance,
-    isLoading,
-    error,
-  } = useTimelineRoadmap(user?.id, chosenJob);
-  const { mutate: syncProgress } = useUpdateRoadmapProgress();
-
-  if (isLoading) {
-    return (
-      <div className='bg-canvas-default flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center font-sans'>
-        <Spinner />
-        <p className='text-brand-muted mt-2 animate-pulse text-sm'>
-          SkillBridge AI sync loading your persistent roadmap tracking
-          profile...
-        </p>
-      </div>
-    );
-  }
-
-  if (error || !roadmapInstance) {
-    return (
-      <div className='bg-canvas-default flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center p-4 text-center font-sans'>
-        <p className='text-feedback-danger font-medium'>
-          Failed to load the active timeline profile row parameters.
-        </p>
-        <button
-          onClick={() => navigate('/recommendations')}
-          className='text-brand-primary mt-4 text-sm font-semibold hover:underline'
-        >
-          Go Back to Recommendations
-        </button>
-      </div>
-    );
-  }
-
-  // Read the milestones array directly out of our PostgreSQL JSONB cell
-  const milestones = roadmapInstance.timeline_milestones_json || [];
-
-  const toggleStepComplete = id => {
-    const updatedMilestones = milestones.map(step => {
-      if (step.id === id) {
-        return { ...step, completed: !step.completed };
-      }
-      return step;
+  const formatDisplayDate = isoString => {
+    const dateObj = new Date(isoString);
+    return dateObj.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
     });
+  };
 
-    // Fire mutation patch directly to database row
-    syncProgress(
-      {
-        roadmapId: roadmapInstance.id,
-        updatedMilestones,
-      },
-      {
-        onSuccess: () => {
-          toast.success('Progress saved online!');
-        },
-        onError: err => {
-          toast.error('Sync failed: ' + err.message);
-        },
-      },
-    );
+  const handleDeleteClick = id => {
+    if (
+      window.confirm(
+        'Are you absolutely sure you want to delete this evaluation? This action will permanently remove its associated learning roadmap from your profile metrics.',
+      )
+    ) {
+      deleteAssessment(id);
+    }
   };
 
   return (
-    <div className='bg-canvas-default mx-auto min-h-[calc(100vh-4rem)] max-w-5xl p-4 font-sans md:p-8'>
-      <div className='mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center'>
-        <div>
-          <h1 className='text-brand-dark text-2xl font-bold'>
-            Learning Roadmap
-          </h1>
-          <p className='text-brand-muted mt-1 text-sm'>
-            Persistent curriculum tracker for your role as a{' '}
-            <span className='text-brand-primary font-bold'>{chosenJob}</span>.
-          </p>
-        </div>
-        <button
-          onClick={() => navigate('/recommendations')}
-          className='text-brand-muted hover:text-brand-dark border-border-subtle bg-canvas-panel inline-flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 text-sm shadow-sm transition-colors'
-        >
-          <ArrowLeftIcon size={16} /> Back to Results
-        </button>
+    <div className='bg-canvas-default mx-auto min-h-[calc(100vh-4rem)] max-w-7xl space-y-6 p-4 font-sans md:p-8'>
+      {/* Banner Card */}
+      <div className='bg-canvas-panel border-border-subtle rounded-2xl border p-6 shadow-sm md:p-8'>
+        <h1 className='text-brand-dark mb-2 text-2xl font-bold md:text-3xl'>
+          Welcome back, {firstName}
+        </h1>
+        <p className='text-brand-muted mb-6 text-sm'>
+          Here is what's happening with your career progression today.
+        </p>
+
+        {isUnlocked ? (
+          <div className='bg-feedback-success/10 border-feedback-success/20 flex items-start gap-3 rounded-lg border p-4 transition-all'>
+            <CheckCircle2Icon
+              className='text-feedback-success mt-0.5 shrink-0'
+              size={20}
+            />
+            <div>
+              <h3 className='text-feedback-success text-sm font-bold'>
+                Career Blueprint Unlocked
+              </h3>
+              <p className='text-feedback-success/80 mt-1 text-sm'>
+                Your technical profile metrics are active! Review your
+                recommended tracks below or visit your tailored timeline.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className='bg-feedback-warning/10 border-feedback-warning/20 flex items-start gap-3 rounded-lg border p-4 transition-all'>
+            <AlertCircleIcon
+              className='text-feedback-warning mt-0.5 shrink-0'
+              size={20}
+            />
+            <div>
+              <h3 className='text-feedback-warning text-sm font-bold'>
+                Career Blueprint Locked
+              </h3>
+              <p className='text-feedback-warning/80 mt-1 text-sm'>
+                Complete a new skill evaluation or upload your latest CV to
+                unlock your personalized career roadmap.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
-      <div className='bg-canvas-panel border-border-subtle relative rounded-2xl border p-6 shadow-sm md:p-10'>
-        <div className='bg-border-subtle absolute top-12 bottom-12 left-10.75 z-0 w-0.5' />
-
-        <div className='relative z-10 space-y-12'>
-          {milestones.map(step => {
-            const isStepDone = step.completed;
-            return (
-              <div key={step.id} className='relative flex items-start gap-6'>
-                <div className='mt-1 shrink-0'>
-                  <div
-                    onClick={() => toggleStepComplete(step.id)}
-                    className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 transition-all duration-200 ${
-                      isStepDone
-                        ? 'bg-feedback-success border-feedback-success text-white shadow-sm'
-                        : 'bg-canvas-inset border-border-subtle hover:border-brand-primary text-transparent'
-                    }`}
-                  >
-                    <CheckIcon
-                      size={18}
-                      className={isStepDone ? 'block' : 'hidden'}
-                    />
-                  </div>
-                </div>
-
-                <div
-                  className={`bg-canvas-panel flex-1 rounded-xl border p-5 transition-all duration-200 ${isStepDone ? 'border-feedback-success/40 bg-feedback-success/5' : 'border-border-subtle'}`}
-                >
-                  <div className='mb-4 flex flex-col justify-between gap-4 md:flex-row md:items-center'>
-                    <div>
-                      <span className='text-brand-secondary mb-1 block text-xs font-bold tracking-wider uppercase'>
-                        {step.month}
-                      </span>
-                      <h3
-                        className={`text-brand-dark text-base font-bold ${isStepDone ? 'text-brand-muted line-through' : ''}`}
-                      >
-                        {step.title}
-                      </h3>
-                    </div>
-
-                    <label className='group flex shrink-0 cursor-pointer items-center gap-2 select-none'>
-                      <input
-                        type='checkbox'
-                        checked={isStepDone}
-                        onChange={() => toggleStepComplete(step.id)}
-                        className='hidden'
-                      />
-                      <div
-                        className={`flex h-5 w-5 items-center justify-center rounded border transition-colors ${isStepDone ? 'bg-brand-primary border-brand-primary text-white' : 'border-border-subtle bg-canvas-inset group-hover:border-brand-primary'}`}
-                      >
-                        {isStepDone && <CheckIcon size={14} />}
-                      </div>
-                      <span className='text-brand-muted group-hover:text-brand-dark text-xs font-semibold'>
-                        Mark month complete
-                      </span>
-                    </label>
-                  </div>
-
-                  <div className='border-border-subtle/50 mt-4 flex flex-wrap gap-y-2 border-t pt-4'>
-                    {step.links.map((link, i) => (
-                      <a
-                        key={i}
-                        href={link.url}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className='text-brand-primary mr-6 inline-flex items-center gap-1.5 text-xs font-semibold hover:underline'
-                      >
-                        {link.text} <ExternalLinkIcon size={12} />
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+      {/* Grid Cards Area */}
+      <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+        <div className='bg-canvas-panel border-border-subtle hover:border-brand-primary/30 flex h-full flex-col rounded-2xl border p-6 shadow-sm transition-colors md:p-8'>
+          <div className='bg-brand-primary/10 text-brand-primary mb-5 flex h-12 w-12 items-center justify-center rounded-xl'>
+            <TargetIcon size={24} />
+          </div>
+          <h2 className='text-brand-dark mb-2 text-lg font-bold'>
+            Interactive Skill Triage
+          </h2>
+          <p className='text-brand-muted mb-8 flex-1 text-xs leading-relaxed'>
+            Manually select your current skills across various disciplines to
+            get an instant assessment of your career readiness.
+          </p>
+          <Link
+            to='/skill-selector'
+            className='bg-brand-primary hover:bg-brand-primary/90 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white transition-colors'
+          >
+            Start Manual Test <ArrowRightIcon size={16} />
+          </Link>
         </div>
+
+        <div className='bg-canvas-panel border-border-subtle hover:border-brand-primary/30 flex h-full flex-col rounded-2xl border p-6 shadow-sm transition-colors md:p-8'>
+          <div className='bg-brand-secondary/10 text-brand-secondary mb-5 flex h-12 w-12 items-center justify-center rounded-xl'>
+            <FileTextIcon size={24} />
+          </div>
+          <h2 className='text-brand-dark mb-2 text-lg font-bold'>
+            Automated CV Upload
+          </h2>
+          <p className='text-brand-muted mb-8 flex-1 text-xs leading-relaxed'>
+            Upload your resume and let our engine automatically extract your
+            experiences to build your profile instantly.
+          </p>
+          <Link
+            to='/cv-upload'
+            className='bg-canvas-panel border-border-subtle text-brand-dark hover:border-brand-primary hover:text-brand-primary inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors'
+          >
+            Upload Document <ArrowRightIcon size={16} />
+          </Link>
+        </div>
+      </div>
+
+      {/* History Log Table Area */}
+      <div className='bg-canvas-panel border-border-subtle overflow-hidden rounded-2xl border shadow-sm'>
+        <div className='border-border-subtle flex items-center justify-between border-b p-6'>
+          <h2 className='text-brand-dark text-base font-bold'>
+            Evaluation History Logs
+          </h2>
+          <span className='text-brand-muted bg-canvas-inset rounded-full px-2.5 py-1 text-xs font-semibold'>
+            {historyLogs.length} Session{historyLogs.length !== 1 ? 's' : ''}
+          </span>
+        </div>
+
+        {historyLogs.length === 0 ? (
+          <div className='text-brand-muted p-12 text-center text-sm font-medium'>
+            No evaluation records found. Complete a triage scan module above to
+            populate history metrics.
+          </div>
+        ) : (
+          <div className='overflow-x-auto'>
+            <table className='w-full border-collapse text-left'>
+              <thead>
+                <tr className='bg-canvas-inset text-brand-muted text-xxs border-border-subtle border-b font-bold tracking-wider uppercase select-none'>
+                  <th className='px-6 py-4 font-semibold'>Date Evaluated</th>
+                  <th className='px-6 py-4 font-semibold'>Discipline Branch</th>
+                  <th className='px-6 py-4 font-semibold'>
+                    Verified Score Met
+                  </th>
+                  <th className='px-6 py-4 text-right font-semibold'>
+                    Actions Control
+                  </th>
+                </tr>
+              </thead>
+              <tbody className='divide-border-subtle divide-y'>
+                {historyLogs.map(row => {
+                  const correspondingRoadmap = savedRoadmaps.find(
+                    rm =>
+                      rm.assessment_id === row.id ||
+                      rm.assessment_id ===
+                        '00000000-0000-0000-0000-000000000000',
+                  );
+                  const targetJobName =
+                    correspondingRoadmap?.target_career_title ||
+                    row.selected_skills[0] ||
+                    'Engineering';
+
+                  return (
+                    <tr
+                      key={row.id}
+                      className='hover:bg-canvas-inset/40 group transition-colors'
+                    >
+                      <td className='text-brand-dark px-6 py-4 text-xs font-medium whitespace-nowrap'>
+                        {formatDisplayDate(row.created_at)}
+                      </td>
+                      <td className='text-brand-dark max-w-xs truncate px-6 py-4 text-xs font-bold'>
+                        {row.tested_discipline}
+                      </td>
+                      <td className='px-6 py-4 text-xs whitespace-nowrap'>
+                        <span
+                          className={`inline-flex items-center rounded-full px-2.5 py-0.5 font-bold ${row.verified_match_score >= 70 ? 'bg-feedback-success/10 text-feedback-success' : 'bg-feedback-warning/10 text-feedback-warning'}`}
+                        >
+                          {row.verified_match_score}%
+                        </span>
+                      </td>
+                      <td className='flex h-14 items-center justify-end gap-4 px-6 py-4 text-right text-xs whitespace-nowrap'>
+                        <Link
+                          to={
+                            correspondingRoadmap
+                              ? `/roadmap?job=${encodeURIComponent(targetJobName)}`
+                              : '/recommendations'
+                          }
+                          className='text-brand-primary inline-flex items-center gap-1 font-bold hover:underline'
+                        >
+                          {correspondingRoadmap ? 'View Roadmap' : 'Review'}{' '}
+                          <ChevronRightIcon size={14} />
+                        </Link>
+
+                        {/* Elegant delete row icon utility */}
+                        <button
+                          onClick={() => handleDeleteClick(row.id)}
+                          disabled={isDeleting}
+                          className='text-brand-muted hover:text-feedback-danger cursor-pointer rounded-md p-1 opacity-60 transition-colors group-hover:opacity-100 disabled:opacity-30'
+                          title='Delete Assessment Record'
+                        >
+                          <Trash2Icon size={14} />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 ```
 
-```js
+## src/features/skill-assessment/hooks/useAssessment.js
+
+```javascript
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { generateAssessmentQuestions } from '../../../services/gemini';
 import { supabase } from '../../../services/supabase';
@@ -7156,6 +6992,8 @@ export function useSubmitAssessment() {
   });
 }
 ```
+
+## src/features/skill-assessment/pages/SkillSelector.jsx
 
 ```jsx
 import { useState } from 'react';
@@ -7294,6 +7132,8 @@ export default function SkillSelector() {
   );
 }
 ```
+
+## src/features/skill-assessment/pages/TestingArena.jsx
 
 ```jsx
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -7575,311 +7415,577 @@ export default function TestingArena() {
 }
 ```
 
-```js
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+## src/index.css
 
-import { deleteAssessmentRecord } from '../../../services/apiRecommendations';
-import { supabase } from '../../../services/supabase';
-import toast from 'react-hot-toast';
+```css
+@import url('https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import 'tailwindcss';
 
-/**
- * Custom hook to aggregate historic logs for the main workspace landing page
- */
-export function useDashboardData(userId) {
-  return useQuery({
-    queryKey: ['dashboardHistory', userId],
-    queryFn: async () => {
-      if (!userId) return { history: [], roadmaps: [] };
-
-      // 1. Fetch all evaluation records ordered by newest first
-      const { data: history, error: historyError } = await supabase
-        .from('assessments')
-        .select('*')
-        .eq('user_id', userId)
-        .order('created_at', { ascending: false });
-
-      if (historyError) throw new Error(historyError.message);
-
-      // 2. Fetch all persistent roadmaps saved to the profile
-      const { data: roadmaps, error: roadmapError } = await supabase
-        .from('roadmaps')
-        .select('*')
-        .eq('user_id', userId);
-
-      if (roadmapError) throw new Error(roadmapError.message);
-
-      return { history, roadmaps };
-    },
-    enabled: Boolean(userId),
-    staleTime: 1000 * 60 * 2, // 2-minute refresh buffer
-  });
+@layer base {
+  button {
+    cursor: pointer;
+  }
 }
 
-/**
- * React Query mutation to handle clearing history rows with instant cache updates
- */
-export function useDeleteAssessment() {
-  const queryClient = useQueryClient();
+@theme {
+  /* Premium System Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
 
-  return useMutation({
-    mutationFn: deleteAssessmentRecord,
-    onSuccess: () => {
-      toast.success('Evaluation record permanently removed.');
-      // Invalidate the cache matrix to trigger an automatic background update across the UI
-      queryClient.invalidateQueries({ queryKey: ['dashboardHistory'] });
-      // Also clear active roadmap cache headers since child records cascaded away
-      queryClient.invalidateQueries({ queryKey: ['activeRoadmap'] });
-    },
-    onError: err => {
-      toast.error('Failed to clear row: ' + err.message);
-    },
-  });
+  /* Light Mode Color System Tokens */
+  --color-canvas-default: #fafafc; /* Crisp, light off-white background canvas */
+  --color-canvas-panel: #ffffff; /* Pure white for bento grid cards/containers */
+  --color-canvas-inset: #f1f1f5; /* Light gray for input/search backgrounds */
+
+  --color-brand-primary: #2563eb; /* Radiant Corporate Blue for primary buttons */
+  --color-brand-secondary: #4f46e5; /* Deep Indigo for main headings */
+  --color-brand-dark: #0f172a; /* Slate 900 for premium, high-contrast text */
+  --color-brand-muted: #475569; /* Slate 600 for subtext and descriptors */
+
+  --color-border-subtle: #e2e8f0; /* Slate 200 for clean lines and card dividers */
+  --color-border-focus: #3b82f6; /* Active, focused input borders */
+
+  /* Contextual Feedback Accents */
+  --color-feedback-success: #10b981; /* Emerald Green for high matching scores */
+  --color-feedback-warning: #f59e0b; /* Amber for technical skill gaps */
+  --color-feedback-danger: #ef4444; /* Rose for system errors or alerts */
+}
+
+@keyframes loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
 }
 ```
 
+## src/main.jsx
+
 ```jsx
-import {
-  AlertCircleIcon,
-  FileTextIcon,
-  TargetIcon,
-  ArrowRightIcon,
-  ChevronRightIcon,
-  CheckCircle2Icon,
-  Trash2Icon,
-} from 'lucide-react';
-import { Link } from 'react-router';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Toaster } from 'react-hot-toast'; // Import Toast engine
+import { createBrowserRouter, RouterProvider } from 'react-router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; // Import React Query
 
-import { useUser } from '../../authentication/hooks/useUser';
-import {
-  useDashboardData,
-  useDeleteAssessment,
-} from '../hooks/useDashboardData';
-import Spinner from '../../../components/Spinner';
+import './index.css';
+import routes from './routes';
 
-export default function HomePage() {
-  const { user, profile, isLoading: isLoadingUser } = useUser();
-  const { data, isLoading: isLoadingData } = useDashboardData(user?.id);
+// Create a persistent, global Query Client instance
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // Cache query data for 5 minutes before refetching
+      retry: 1, // Retry failed network/API requests once before alerting
+    },
+  },
+});
 
-  // Initialize our new real-time deletion engine hook
-  const { mutate: deleteAssessment, isPending: isDeleting } =
-    useDeleteAssessment();
+const router = createBrowserRouter(routes);
 
-  if (isLoadingUser || isLoadingData) {
-    return (
-      <div className='bg-canvas-default flex min-h-[calc(100vh-4rem)] items-center justify-center font-sans'>
-        <Spinner />
-      </div>
-    );
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+
+      {/* Global toast notifications config */}
+      <Toaster
+        position='top-center'
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            background: '#FFFFFF',
+            color: '#0F172A',
+            fontFamily: 'Inter, sans-serif',
+            border: '1px solid #E2E8F0',
+            boxShadow: '0 4px 6px -1px rgba(15, 23, 42, 0.03)',
+          },
+        }}
+      />
+    </QueryClientProvider>
+  </StrictMode>,
+);
+
+// window.__TANSTACK_QUERY_CLIENT__ = queryClient; // For Dev Purpose
+```
+
+## src/routes.jsx
+
+```jsx
+import { Navigate } from 'react-router';
+
+import Signup from './features/authentication/pages/Signup';
+import Login from './features/authentication/pages/Login';
+import ForgotPassword from './features/authentication/pages/ForgotPassword';
+import AppLayout from './components/AppLayout';
+import Settings from './features/authentication/pages/Settings';
+import CvUploadPage from './features/cv-processing/pages/CvUploadPage';
+import SkillSelector from './features/skill-assessment/pages/SkillSelector';
+import TestingArena from './features/skill-assessment/pages/TestingArena';
+import RecommendationsPage from './features/career-recommendation/pages/RecommendationsPage';
+import RoadmapView from './features/career-recommendation/pages/RoadmapView';
+import HomePage from './features/dashboard/pages/HomePage';
+import ProtectedRoute from './components/ProtectedRoute';
+import ResetPassword from './features/authentication/pages/ResetPassword';
+
+const routes = [
+  // PUBLIC ROUTES
+  { path: '/signup', element: <Signup /> },
+  { path: '/login', element: <Login /> },
+  { path: '/forgot-password', element: <ForgotPassword /> },
+  { path: '/reset-password', element: <ResetPassword /> },
+
+  // PRIVATE ROUTES
+  {
+    element: (
+      <ProtectedRoute>
+        <AppLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      { path: '/', element: <HomePage /> },
+      { path: '/settings', element: <Settings /> },
+      { path: '/cv-upload', element: <CvUploadPage /> },
+      { path: '/skill-selector', element: <SkillSelector /> },
+      { path: '/assessment', element: <TestingArena /> },
+      { path: '/recommendations', element: <RecommendationsPage /> },
+      { path: '/roadmap', element: <RoadmapView /> },
+    ],
+  },
+
+  // FALLBACK
+  { path: '*', element: <Navigate to='/' replace /> },
+];
+
+export default routes;
+```
+
+## src/services/apiAuth.js
+
+```javascript
+import { supabase } from './supabase';
+
+/**
+ * Registers a new student using Supabase Auth
+ */
+export async function signUpUser({ email, password, fullName }) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        full_name: fullName,
+      },
+    },
+  });
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+/**
+ * Authenticates an existing student session
+ */
+export async function loginUser({ email, password }) {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+/**
+ * Grabs the active user session and attaches their custom profile table row
+ */
+export async function getCurrentUser() {
+  // 1. Check if there is an active session from Supabase
+  const { data: sessionData } = await supabase.auth.getSession();
+  if (!sessionData.session) return null;
+
+  const { data: authUser, error: authError } = await supabase.auth.getUser();
+  if (authError) throw new Error(authError.message);
+
+  // 2. Fetch the corresponding synchronized profile row from PostgreSQL
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', authUser.user.id)
+    .single();
+
+  if (profileError) {
+    console.error('Profile fetch error:', profileError.message);
+    return null;
   }
 
-  const firstName = profile?.full_name
-    ? profile.full_name.split(' ')[0]
-    : 'Scholar';
-  const historyLogs = data?.history || [];
-  const savedRoadmaps = data?.roadmaps || [];
-  const isUnlocked = historyLogs.length > 0;
+  // Return a combined object containing both credentials and custom profile metadata
+  return {
+    ...authUser.user,
+    profile,
+  };
+}
 
-  const formatDisplayDate = isoString => {
-    const dateObj = new Date(isoString);
-    return dateObj.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
+/**
+ * Signs out the current user session completely
+ */
+export async function logoutUser() {
+  const { error } = await supabase.auth.signOut();
+  if (error) throw new Error(error.message);
+}
+
+/**
+ * Updates metadata fields inside the profiles table
+ */
+export async function updateProfileDetails({
+  userId,
+  fullName,
+  university,
+  avatarUrl,
+}) {
+  const updateData = {
+    full_name: fullName,
+    university,
+    updated_at: new Date().toISOString(),
+  };
+  if (avatarUrl) updateData.avatar_url = avatarUrl;
+
+  const { data, error } = await supabase
+    .from('profiles')
+    .update(updateData)
+    .eq('id', userId)
+    .select()
+    .single();
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+/**
+ * Uploads an avatar image asset directly into the Supabase 'avatars' bucket storage
+ */
+export async function uploadAvatarImage(file, userId) {
+  const fileExtension = file.name.split('.').pop();
+  const filePath = `${userId}-${Math.random()}.${fileExtension}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from('avatars')
+    .upload(filePath, file, { cacheControl: '3600', upsert: true });
+
+  if (uploadError) throw new Error(uploadError.message);
+
+  const { data } = supabase.storage.from('avatars').getPublicUrl(filePath);
+  return data.publicUrl;
+}
+
+/**
+ * Updates the user's active login password credentials
+ */
+export async function updateUserPassword(newPassword) {
+  const { data, error } = await supabase.auth.updateUser({
+    password: newPassword,
+  });
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+/**
+ * Deletes the student's entire account along with all cascaded profile logs
+ */
+export async function deleteUserAccountComplete() {
+  // Due to Supabase client boundaries, RPC or Edge triggers handle remote deletions smoothly,
+  // but running a direct auth.users delete clears data cascades perfectly for project simulation targets.
+  const { error } = await supabase.rpc('delete_user_self');
+
+  // Fallback: Sign out the user and clean client history variables instantly
+  if (error) {
+    const { error: authDeleteError } = await supabase.auth.signOut();
+    if (authDeleteError) throw new Error(authDeleteError.message);
+  }
+}
+
+/**
+ * Triggers a secure password recovery email via Supabase Auth
+ */
+export async function sendPasswordResetEmail(email) {
+  // Route the inbox link directly to the clean public reset page
+  const redirectToUrl = `${window.location.origin}/reset-password`;
+
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: redirectToUrl,
+  });
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+```
+
+## src/services/apiRecommendations.js
+
+```javascript
+import { supabase } from './supabase';
+import { genAI } from './gemini';
+
+const JSON_CLEAN_REGEX = /^```json\s+|\s+```$/g;
+
+/**
+ * 1. Pulls the student's absolute latest assessment row from Supabase
+ */
+export async function getLatestUserAssessment(userId) {
+  const { data, error } = await supabase
+    .from('assessments')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false })
+    .limit(1);
+
+  if (error) throw new Error(error.message);
+  return data[0] || null;
+}
+
+/**
+ * 2. Feeds that assessment row to Gemini to generate the career options payload
+ */
+export async function generateAiCareerRecommendations(assessmentData) {
+  if (!assessmentData) return [];
+
+  const prompt = `
+    You are an expert Nigerian career counselor and tech talent placement officer.
+    Analyze this student's objective technical evaluation performance metrics to recommend matching careers:
+
+    EVALUATION METRICS:
+    - Target Domain Field Focus: ${assessmentData.tested_discipline}
+    - Verified Input Competencies: ${assessmentData.selected_skills.join(', ')}
+    - Objective Exam Score: ${assessmentData.verified_match_score}%
+
+    Based on this data, identify exactly three real-world career paths suitable for the student. Focus on fields relevant to modern Nigerian industries (e.g., Fintech, localized engineering, or global remote consulting tracks).
+
+    Identify 'Verified Strengths' based only on skills that match their baseline focus, and identify explicit 'Skill Gaps' the student needs to work on to become job-ready.
+
+    Return ONLY a raw JSON array matching this exact schema layout without markdown code blocks:
+    [
+      {
+        "id": 1,
+        "title": "Frontend Engineer",
+        "description": "Build modern interfaces and dynamic web apps...",
+        "match_percentage": 88,
+        "strengths": ["React Fundamentals", "Tailwind CSS Layouts"],
+        "gaps": ["Advanced State Management (Redux)", "Unit Testing Frameworks"]
+      }
+    ]
+  `;
+
+  try {
+    const response = await genAI.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
     });
-  };
 
-  const handleDeleteClick = id => {
-    if (
-      window.confirm(
-        'Are you absolutely sure you want to delete this evaluation? This action will permanently remove its associated learning roadmap from your profile metrics.',
-      )
-    ) {
-      deleteAssessment(id);
-    }
-  };
+    const cleanText = response.text.replace(JSON_CLEAN_REGEX, '').trim();
+    return JSON.parse(cleanText);
+  } catch (error) {
+    console.error('Gemini Recommendation Fetch Failure:', error);
+    throw new Error('Failed to parse career recommendation insights.');
+  }
+}
 
-  return (
-    <div className='bg-canvas-default mx-auto min-h-[calc(100vh-4rem)] max-w-7xl space-y-6 p-4 font-sans md:p-8'>
-      {/* Banner Card */}
-      <div className='bg-canvas-panel border-border-subtle rounded-2xl border p-6 shadow-sm md:p-8'>
-        <h1 className='text-brand-dark mb-2 text-2xl font-bold md:text-3xl'>
-          Welcome back, {firstName}
-        </h1>
-        <p className='text-brand-muted mb-6 text-sm'>
-          Here is what's happening with your career progression today.
-        </p>
+/**
+ * 3. Saves the three AI-generated career paths back into the assessment record row
+ */
+export async function saveRecommendationsToAssessment({
+  assessmentId,
+  recommendations,
+}) {
+  const { data, error } = await supabase
+    .from('assessments')
+    .update({ generated_recommendations: recommendations })
+    .eq('id', assessmentId)
+    .select()
+    .single();
 
-        {isUnlocked ? (
-          <div className='bg-feedback-success/10 border-feedback-success/20 flex items-start gap-3 rounded-lg border p-4 transition-all'>
-            <CheckCircle2Icon
-              className='text-feedback-success mt-0.5 shrink-0'
-              size={20}
-            />
-            <div>
-              <h3 className='text-feedback-success text-sm font-bold'>
-                Career Blueprint Unlocked
-              </h3>
-              <p className='text-feedback-success/80 mt-1 text-sm'>
-                Your technical profile metrics are active! Review your
-                recommended tracks below or visit your tailored timeline.
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className='bg-feedback-warning/10 border-feedback-warning/20 flex items-start gap-3 rounded-lg border p-4 transition-all'>
-            <AlertCircleIcon
-              className='text-feedback-warning mt-0.5 shrink-0'
-              size={20}
-            />
-            <div>
-              <h3 className='text-feedback-warning text-sm font-bold'>
-                Career Blueprint Locked
-              </h3>
-              <p className='text-feedback-warning/80 mt-1 text-sm'>
-                Complete a new skill evaluation or upload your latest CV to
-                unlock your personalized career roadmap.
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
+  if (error) throw new Error(error.message);
+  return data;
+}
 
-      {/* Grid Cards Area */}
-      <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
-        <div className='bg-canvas-panel border-border-subtle hover:border-brand-primary/30 flex h-full flex-col rounded-2xl border p-6 shadow-sm transition-colors md:p-8'>
-          <div className='bg-brand-primary/10 text-brand-primary mb-5 flex h-12 w-12 items-center justify-center rounded-xl'>
-            <TargetIcon size={24} />
-          </div>
-          <h2 className='text-brand-dark mb-2 text-lg font-bold'>
-            Interactive Skill Triage
-          </h2>
-          <p className='text-brand-muted mb-8 flex-1 text-xs leading-relaxed'>
-            Manually select your current skills across various disciplines to
-            get an instant assessment of your career readiness.
-          </p>
-          <Link
-            to='/skill-selector'
-            className='bg-brand-primary hover:bg-brand-primary/90 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white transition-colors'
-          >
-            Start Manual Test <ArrowRightIcon size={16} />
-          </Link>
-        </div>
+/**
+ * 4. Feeds the chosen career path and identified gaps to Gemini to generate a structured timeline roadmap
+ */
+export async function generateAiTimelineRoadmap({
+  targetCareer,
+  identifiedGaps,
+}) {
+  const prompt = `
+    You are an elite tech career coach specializing in the Nigerian job market.
+    Generate a highly practical, personalized month-by-month learning roadmap for a student transitioning into this role.
 
-        <div className='bg-canvas-panel border-border-subtle hover:border-brand-primary/30 flex h-full flex-col rounded-2xl border p-6 shadow-sm transition-colors md:p-8'>
-          <div className='bg-brand-secondary/10 text-brand-secondary mb-5 flex h-12 w-12 items-center justify-center rounded-xl'>
-            <FileTextIcon size={24} />
-          </div>
-          <h2 className='text-brand-dark mb-2 text-lg font-bold'>
-            Automated CV Upload
-          </h2>
-          <p className='text-brand-muted mb-8 flex-1 text-xs leading-relaxed'>
-            Upload your resume and let our engine automatically extract your
-            experiences to build your profile instantly.
-          </p>
-          <Link
-            to='/cv-upload'
-            className='bg-canvas-panel border-border-subtle text-brand-dark hover:border-brand-primary hover:text-brand-primary inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors'
-          >
-            Upload Document <ArrowRightIcon size={16} />
-          </Link>
-        </div>
-      </div>
+    TARGET CAREER: ${targetCareer}
+    IDENTIFIED SKILL GAPS TO BRIDGE: ${identifiedGaps.join(', ')}
 
-      {/* History Log Table Area */}
-      <div className='bg-canvas-panel border-border-subtle overflow-hidden rounded-2xl border shadow-sm'>
-        <div className='border-border-subtle flex items-center justify-between border-b p-6'>
-          <h2 className='text-brand-dark text-base font-bold'>
-            Evaluation History Logs
-          </h2>
-          <span className='text-brand-muted bg-canvas-inset rounded-full px-2.5 py-1 text-xs font-semibold'>
-            {historyLogs.length} Session{historyLogs.length !== 1 ? 's' : ''}
-          </span>
-        </div>
+    Create a strict 6-month progressive curriculum to bridge these gaps. 
+    For each month, define a clear overarching technical theme, a primary skill focus, and include 2 accessible learning resource links.
+    Crucially, mix global platforms (like Coursera, freeCodeCamp, or Udemy) with affordable, localized options relevant to Nigeria (such as ALX Africa, Jobberman Skills, or Utiva tracks).
 
-        {historyLogs.length === 0 ? (
-          <div className='text-brand-muted p-12 text-center text-sm font-medium'>
-            No evaluation records found. Complete a triage scan module above to
-            populate history metrics.
-          </div>
-        ) : (
-          <div className='overflow-x-auto'>
-            <table className='w-full border-collapse text-left'>
-              <thead>
-                <tr className='bg-canvas-inset text-brand-muted text-xxs border-border-subtle border-b font-bold tracking-wider uppercase select-none'>
-                  <th className='px-6 py-4 font-semibold'>Date Evaluated</th>
-                  <th className='px-6 py-4 font-semibold'>Discipline Branch</th>
-                  <th className='px-6 py-4 font-semibold'>
-                    Verified Score Met
-                  </th>
-                  <th className='px-6 py-4 text-right font-semibold'>
-                    Actions Control
-                  </th>
-                </tr>
-              </thead>
-              <tbody className='divide-border-subtle divide-y'>
-                {historyLogs.map(row => {
-                  const correspondingRoadmap = savedRoadmaps.find(
-                    rm =>
-                      rm.assessment_id === row.id ||
-                      rm.assessment_id ===
-                        '00000000-0000-0000-0000-000000000000',
-                  );
-                  const targetJobName =
-                    correspondingRoadmap?.target_career_title ||
-                    row.selected_skills[0] ||
-                    'Engineering';
+    Return ONLY a raw JSON array matching this exact schema layout without markdown code fence blocks:
+    [
+      {
+        "id": 1,
+        "month": "Month 1",
+        "title": "Foundational Theme Title",
+        "completed": false,
+        "links": [
+          { "text": "ALX Software Engineering Track", "url": "https://www.alxafrica.com" },
+          { "text": "Coursera: Basic Frameworks", "url": "https://www.coursera.org" }
+        ]
+      }
+    ]
+  `;
 
-                  return (
-                    <tr
-                      key={row.id}
-                      className='hover:bg-canvas-inset/40 group transition-colors'
-                    >
-                      <td className='text-brand-dark px-6 py-4 text-xs font-medium whitespace-nowrap'>
-                        {formatDisplayDate(row.created_at)}
-                      </td>
-                      <td className='text-brand-dark max-w-xs truncate px-6 py-4 text-xs font-bold'>
-                        {row.tested_discipline}
-                      </td>
-                      <td className='px-6 py-4 text-xs whitespace-nowrap'>
-                        <span
-                          className={`inline-flex items-center rounded-full px-2.5 py-0.5 font-bold ${row.verified_match_score >= 70 ? 'bg-feedback-success/10 text-feedback-success' : 'bg-feedback-warning/10 text-feedback-warning'}`}
-                        >
-                          {row.verified_match_score}%
-                        </span>
-                      </td>
-                      <td className='flex h-14 items-center justify-end gap-4 px-6 py-4 text-right text-xs whitespace-nowrap'>
-                        <Link
-                          to={
-                            correspondingRoadmap
-                              ? `/roadmap?job=${encodeURIComponent(targetJobName)}`
-                              : '/recommendations'
-                          }
-                          className='text-brand-primary inline-flex items-center gap-1 font-bold hover:underline'
-                        >
-                          {correspondingRoadmap ? 'View Roadmap' : 'Review'}{' '}
-                          <ChevronRightIcon size={14} />
-                        </Link>
+  try {
+    const response = await genAI.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
+    });
 
-                        {/* Elegant delete row icon utility */}
-                        <button
-                          onClick={() => handleDeleteClick(row.id)}
-                          disabled={isDeleting}
-                          className='text-brand-muted hover:text-feedback-danger cursor-pointer rounded-md p-1 opacity-60 transition-colors group-hover:opacity-100 disabled:opacity-30'
-                          title='Delete Assessment Record'
-                        >
-                          <Trash2Icon size={14} />
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-    </div>
+    const cleanText = response.text.replace(/^```json\s+|\s+```$/g, '').trim();
+    return JSON.parse(cleanText);
+  } catch (error) {
+    console.error('Gemini Roadmap Generation Failure:', error);
+    throw new Error('Failed to assemble personalized monthly timeline steps.');
+  }
+}
+
+/**
+ * 5. Patches the updated milestone completion checklist array into the database row
+ */
+export async function updateRoadmapProgress({ roadmapId, updatedMilestones }) {
+  const { data, error } = await supabase
+    .from('roadmaps')
+    .update({ timeline_milestones_json: updatedMilestones })
+    .eq('id', roadmapId)
+    .select()
+    .single();
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+/**
+ * 6. Completely removes an assessment record row out of Supabase PostgreSQL
+ */
+export async function deleteAssessmentRecord(assessmentId) {
+  const { data, error } = await supabase
+    .from('assessments')
+    .delete()
+    .eq('id', assessmentId);
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+```
+
+## src/services/gemini.js
+
+```javascript
+import { GoogleGenAI } from '@google/genai';
+
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+if (!apiKey) {
+  console.error(
+    'Missing VITE_GEMINI_API_KEY environment configuration variable.',
   );
 }
+
+export const genAI = new GoogleGenAI({ apiKey });
+
+const JSON_CLEAN_REGEX = /^```json\s+|\s+```$/g;
+
+/**
+ * Generates an automated, dynamic multi-choice quiz with adaptive volume
+ */
+export async function generateAssessmentQuestions(selectedSkills) {
+  // Calculate dynamic constraints based on the size of the chosen array
+  const skillCount = selectedSkills.length;
+  const questionsPerSkill = skillCount <= 2 ? 5 : 3;
+
+  const prompt = `
+    You are an expert technical interviewer. Generate an assessment exam to test professional proficiency.
+    SKILLS TO TEST: ${selectedSkills.join(', ')}
+
+    CRITICAL INSTRUCTION: Because the student selected exactly ${skillCount} skill(s), you MUST generate exactly ${questionsPerSkill} high-quality Multiple Choice Questions (MCQs) for EACH individual skill listed. 
+    Total questions in your output array must be exactly ${skillCount * questionsPerSkill}.
+
+    Each question must have 4 distinct, plausible options, an explicit zero-indexed correct answer, and a clear educational explanation.
+
+    Return ONLY a raw JSON array matching this exact schema layout without markdown formatting tags or code block fences:
+    [
+      {
+        "id": 1,
+        "skill": "Skill Name",
+        "question": "Clear technical scenario question?",
+        "options": ["Option 0", "Option 1", "Option 2", "Option 3"],
+        "correct_option_index": 0,
+        "explanation": "Brief explanation addressing why the option is correct."
+      }
+    ]
+  `;
+
+  try {
+    const response = await genAI.models.generateContent({
+      model: 'gemini-3.5-flash',
+      contents: prompt,
+    });
+
+    const cleanText = response.text.replace(JSON_CLEAN_REGEX, '').trim();
+    return JSON.parse(cleanText);
+  } catch (error) {
+    console.error('Gemini Generation Error:', error);
+    throw new Error('Failed to compile adaptive assessment parameters.');
+  }
+}
+```
+
+## src/services/supabase.js
+
+```javascript
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
+```
+
+## vercel.json
+
+```json
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+```
+
+## vite.config.js
+
+```javascript
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+});
 ```
 

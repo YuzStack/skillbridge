@@ -10,6 +10,7 @@ const categories = [
       'Python',
       'Node.js',
       'AWS',
+      'Web Development',
       'Cybersecurity',
       'Data Analysis',
       'UI/UX Design',
@@ -25,6 +26,7 @@ const categories = [
       'Robotics',
       'Civil Planning',
       'Thermodynamics',
+      'Electrical Design',
     ],
   },
   {
